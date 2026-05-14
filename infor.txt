@@ -1,0 +1,34 @@
+1. Fundações Visuais (Design Tokens)1.1 Paleta de Cores (The Sovereign Palette)As cores são escuras para reduzir a fadiga visual e o Ciano é usado como "ponte de ação".CategoriaNomeHexUsoFundoDark Navy#020617Fundo principal (Body).ContainersTeal Deep#002D37Seções, Header, Cards e Footers.Ação (CTA)Action Cyan#00F0FFBotões primários, badges ativas, links de destaque.AutoridadeElite Gold#F59E0BSelos de tempo (16 anos), Mentorias Premium.Texto HighPure White#F8FAFCTítulos e textos de alta leitura.Texto LowSlate Gray#94A3B8Subtítulos e textos de apoio.1.2 TipografiaHeadings (Títulos): Montserrat ou Poppins. Peso: 700 (Bold) a 900 (Black).Body (Corpo): Inter. Peso: 400 (Regular) a 600 (Semi-bold).Escala:H1: 72px (Hero - Desktop) | 40px (Mobile)H2: 48px (Seções)Body: 16pxLabels: 12px (Uppercase + Tracking 0.1em)2. Componentes (Biblioteca UI)2.1 Botões (Action Triggers)Primário (Elite): Fundo Ciano, Texto Teal Deep. Canto arredondado: 12px (xl). Efeito: Outer Glow Ciano no hover.Secundário (Outline): Borda 1px Ciano, Texto Ciano. Fundo transparente.Ghost: Sem borda, Texto White, Hover com fundo Ciano (10% opacidade).2.2 Cards de Conteúdo (The Master Grid)Anatomia: Bordas de 12px, fundo Teal Deep, borda sutil de 1px (#ffffff10).Variações:Curso: Badge superior ciano, título, ícones de benefícios (Lucide Icons), preço e CTAs.Edital: Badge de status (Verde para Aberto, Azul para Próximo), salário em destaque (Ciano).Material: Thumbnail do arquivo com sobreposição de ícone de cadeado (Gated Content).2.3 Social Hub (Stories)Visual: Círculos de 80px com borda gradiente.Interação: Clique abre um Video Overlay (aspect ratio 9:16) centralizado, obscurecendo o fundo com blur.3. Comportamento e UX (As Leis do SCVP)3.1 Lei do Zero RedirecionamentoO usuário nunca deve sentir que "saiu" do lugar.Captura de Leads: Use Side Drawers (painéis laterais) que deslizam da direita.Login/Stories: Use Modais com fundo backdrop-blur-md.Filtros: A filtragem de cursos e editais deve ser instantânea via estados (sem recarregamento de página).3.2 Hierarquia Visual (The 80/20 Rule)O que é Ação deve ser Ciano.O que é Informação de Apoio deve ser Slate Gray.O rosto do Mentor (Fabio Silva) deve estar presente em todas as dobras de conversão.4. Guia de Implementação (Tailwind mapping)Para o designer exportar e você implementar no VSCode:JavaScript// tailwind.config.js
+module.exports = {
+  theme: {
+    extend: {
+      colors: {
+        scvp: {
+          navy: '#020617',
+          teal: '#002D37',
+          cyan: '#00F0FF',
+          gold: '#F59E0B',
+          slate: '#94A3B8',
+        }
+      },
+      borderRadius: {
+        'xl': '12px',
+        '2xl': '24px',
+      },
+      boxShadow: {
+        'neon': '0 0 20px rgba(0, 240, 255, 0.3)',
+      }
+    }
+  }
+}
+
+
+
+
+Instruções de Micro-interações (O "Uau" do Cliente)
+
+    Glow Ativo: Sempre que o mouse passar sobre um botão Ciano, ele deve emitir um leve brilho (shadow spread).
+
+    Scroll Suave: Links do Header (Cursos, Alertas) devem levar às seções com scroll-behavior: smooth.
+
+    Skeleton Loading: No protótipo funcional, simule o carregamento dos cards de curso com um efeito de pulso antes de mostrar os dados reais.
