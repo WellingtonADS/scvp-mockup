@@ -17,7 +17,7 @@
     "utils": "@/core/utils",
     "ui": "@/components/ui",
     "lib": "@/core",
-    "hooks": "@/hooks"
+    "hooks": "@/core"
   },
   "menuColor": "default",
   "menuAccent": "subtle",
