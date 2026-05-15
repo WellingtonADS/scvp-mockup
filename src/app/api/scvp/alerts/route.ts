@@ -1,4 +1,4 @@
-import { alerts } from "@/lib/scvp-alerts-data";
+import { alerts } from "@/core/constants";
 import { NextResponse } from "next/server";
 
 export async function GET() {

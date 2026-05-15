@@ -12,8 +12,9 @@ import {
   DrawerTitle,
   DrawerTrigger,
 } from "@/components/ui/drawer";
-import type { AlertItem } from "@/lib/scvp-types";
+import type { AlertItem } from "@/core/types";
 import { CalendarDays, Landmark, MapPin, UsersRound } from "lucide-react";
+import { ServiceRequestDialog } from "./service-request-dialog";
 
 type AlertCardProps = {
   alert: AlertItem;
@@ -125,18 +126,22 @@ export function AlertCard({ alert }: AlertCardProps) {
               </p>
             </div>
             <DrawerFooter>
-              <Button className="cta-cyan font-black uppercase tracking-[0.12em]">
-                Salvar alerta
-              </Button>
+              <ServiceRequestDialog
+                triggerText="Salvar alerta"
+                title="Salve este edital no radar"
+                description={`Informe seus dados para receber avisos e materiais relacionados a ${alert.orgao}.`}
+                triggerClassName="tracking-[0.12em]"
+              />
             </DrawerFooter>
           </DrawerContent>
         </Drawer>
-        <Button
-          size="sm"
-          className="cta-cyan h-8 text-[10px] font-black uppercase tracking-[0.08em]"
-        >
-          Salvar alerta
-        </Button>
+        <ServiceRequestDialog
+          triggerText="Salvar alerta"
+          title="Salve este edital no radar"
+          description={`Informe seus dados para receber avisos e materiais relacionados a ${alert.orgao}.`}
+          triggerClassName="h-8 text-[10px] tracking-[0.08em]"
+          triggerSize="sm"
+        />
       </div>
     </Card>
   );

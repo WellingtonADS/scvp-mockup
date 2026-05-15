@@ -1,8 +1,10 @@
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
-import type { Course } from "@/lib/scvp-types";
+import type { Course } from "@/core/types";
 import { Building2, FileText, Video } from "lucide-react";
+import Link from "next/link";
+import { ServiceRequestDialog } from "./service-request-dialog";
 
 type CourseCardProps = {
   course: Course;
@@ -63,18 +65,20 @@ export function CourseCard({ course }: CourseCardProps) {
 
       <div className="mt-3 grid grid-cols-2 gap-2">
         <Button
+          asChild
           size="sm"
           variant="outline"
           className="h-8 border-white/25 bg-transparent text-[10px] font-black uppercase tracking-[0.08em] text-slate-100 hover:bg-white/10"
         >
-          Ver detalhes
+          <Link href="/cursos#catalogo">Ver detalhes</Link>
         </Button>
-        <Button
-          size="sm"
-          className="cta-cyan h-8 text-[10px] font-black uppercase tracking-[0.08em]"
-        >
-          Matricular agora
-        </Button>
+        <ServiceRequestDialog
+          triggerText="Matricular agora"
+          title="Solicite sua matrícula"
+          description={`Informe seus dados para a equipe SCVP orientar a matrícula em ${course.title}.`}
+          triggerClassName="h-8 text-[10px] tracking-[0.08em]"
+          triggerSize="sm"
+        />
       </div>
     </Card>
   );

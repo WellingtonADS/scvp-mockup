@@ -1,4 +1,4 @@
-import { courses } from "@/lib/scvp-courses-data";
+import { courses } from "@/core/constants";
 import { NextResponse } from "next/server";
 
 export async function GET() {

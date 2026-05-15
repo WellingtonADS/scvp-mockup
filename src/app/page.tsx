@@ -1,10 +1,8 @@
-import { getHomePageData } from "@/lib/scvp-service";
-import { HomePremium } from "../components/scvp/home-premium";
+import { HomeView } from "@/components/views/home-view";
+import { getHomePageData } from "@/core/services";
 
 export default async function Home() {
   const { featuredCourses, quickTips } = await getHomePageData();
 
-  return (
-    <HomePremium featuredCourses={featuredCourses} quickTips={quickTips} />
-  );
+  return <HomeView featuredCourses={featuredCourses} quickTips={quickTips} />;
 }

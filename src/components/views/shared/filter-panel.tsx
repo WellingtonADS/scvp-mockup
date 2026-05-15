@@ -10,7 +10,7 @@ import {
   DrawerTitle,
   DrawerTrigger,
 } from "@/components/ui/drawer";
-import type { FilterOption } from "@/lib/scvp-types";
+import type { FilterOption } from "@/core/types";
 import { SlidersHorizontal } from "lucide-react";
 import { useEffect, useState } from "react";
 

@@ -1,8 +1,9 @@
 "use client";
 
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import type { FilterOption, Material } from "@/lib/scvp-types";
+import type { FilterOption, Material } from "@/core/types";
 import { useState } from "react";
+import { BrowseEmptyState } from "./browse-shared";
 import { FilterPanel } from "./filter-panel";
 import { MaterialCard } from "./material-card";
 
@@ -84,14 +85,10 @@ export function MaterialsBrowser({ items, filters }: MaterialsBrowserProps) {
               ))}
             </div>
           ) : (
-            <div className="glass-card rounded-[28px] border-white/12 p-8 text-center">
-              <p className="text-sm font-black uppercase tracking-[0.18em] text-[#00F0FF]">
-                Nenhum material nessa seleção
-              </p>
-              <p className="mt-3 text-sm text-slate-300">
-                Tente combinar outro tipo de recurso com uma carreira diferente.
-              </p>
-            </div>
+            <BrowseEmptyState
+              title="Nenhum material nessa seleção"
+              description="Tente combinar outro tipo de recurso com uma carreira diferente."
+            />
           )}
         </TabsContent>
       </Tabs>

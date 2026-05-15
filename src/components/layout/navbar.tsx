@@ -16,6 +16,7 @@ const navigationLinks = [
   { href: "/", label: "Home" },
   { href: "/cursos", label: "Cursos" },
   { href: "/alertas", label: "Alertas" },
+  { href: "/hub", label: "Materiais" },
   { href: "/institucional", label: "Institucional" },
 ];
 

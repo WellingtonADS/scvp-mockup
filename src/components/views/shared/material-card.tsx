@@ -1,9 +1,10 @@
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
-import type { Material } from "@/lib/scvp-types";
+import type { Material } from "@/core/types";
 import { Download, FileText, LockKeyhole, Sparkles } from "lucide-react";
-import { LeadCaptureDialog } from "./lead-capture-dialog";
+import Link from "next/link";
+import { ServiceRequestDialog } from "./service-request-dialog";
 
 type MaterialCardProps = {
   material: Material;
@@ -56,13 +57,14 @@ export function MaterialCard({ material }: MaterialCardProps) {
 
       <div className="mt-4 grid grid-cols-2 gap-2">
         <Button
+          asChild
           size="sm"
           variant="outline"
           className="border-white/25 bg-transparent text-[11px] font-black uppercase tracking-[0.12em] text-slate-100 hover:bg-white/10"
         >
-          Ver detalhes
+          <Link href="/hub#materiais">Ver detalhes</Link>
         </Button>
-        <LeadCaptureDialog
+        <ServiceRequestDialog
           triggerText="Baixar agora"
           triggerSize="sm"
           triggerClassName="text-[11px] tracking-[0.12em]"

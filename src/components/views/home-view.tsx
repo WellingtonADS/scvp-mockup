@@ -14,8 +14,8 @@ import {
 import Link from "next/link";
 import { useEffect, useMemo, useState } from "react";
 
-import { Footer } from "@/components/scvp/footer";
-import { StickyMobileCta } from "@/components/scvp/sticky-mobile-cta";
+import { Footer } from "@/components/layout/footer";
+import { StickyMobileCta } from "@/components/layout/page-shell";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import {
@@ -34,7 +34,9 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import type { Course } from "@/lib/scvp-types";
+import { SecondaryCtaLink } from "@/components/views/shared/secondary-cta-link";
+import { ServiceRequestDialog } from "@/components/views/shared/service-request-dialog";
+import type { Course } from "@/core/types";
 
 const navItems = [
   { href: "#home", label: "Home" },
@@ -52,12 +54,12 @@ type Story = {
   videoUrl: string;
 };
 
-type HomePremiumProps = {
+type HomeViewProps = {
   featuredCourses: Course[];
   quickTips: string[];
 };
 
-export function HomePremium({ featuredCourses, quickTips }: HomePremiumProps) {
+export function HomeView({ featuredCourses, quickTips }: HomeViewProps) {
   const [activeTab, setActiveTab] = useState("TODOS");
   const [coursesLoading, setCoursesLoading] = useState(true);
   const [selectedStory, setSelectedStory] = useState<Story | null>(null);
@@ -206,16 +208,16 @@ export function HomePremium({ featuredCourses, quickTips }: HomePremiumProps) {
                   elite para acelerar decisões e execução.
                 </p>
                 <div className="flex flex-wrap gap-3">
-                  <Button className="cta-cyan h-10 px-5 text-[11px] font-black uppercase tracking-[0.16em] hover:scale-105">
-                    Quero ser aprovado
-                  </Button>
-                  <Button
-                    asChild
-                    variant="outline"
-                    className="h-10 border-white/30 bg-transparent px-5 text-[11px] font-black uppercase tracking-[0.16em] text-slate-100 hover:bg-white/10"
-                  >
-                    <Link href="#cursos">Ver catálogo</Link>
-                  </Button>
+                  <ServiceRequestDialog
+                    triggerText="Quero ser aprovado"
+                    title="Comece pela rota certa"
+                    description="Informe seus dados para receber uma orientação inicial alinhada ao seu edital e momento de preparação."
+                    triggerClassName="h-10 px-5 text-[11px] tracking-[0.16em] hover:scale-105"
+                    triggerSize="default"
+                  />
+                  <SecondaryCtaLink href="#cursos">
+                    Ver catálogo
+                  </SecondaryCtaLink>
                 </div>
               </div>
             </article>
@@ -274,7 +276,7 @@ export function HomePremium({ featuredCourses, quickTips }: HomePremiumProps) {
                     key={course.id}
                     className="group relative overflow-hidden rounded-[10px] border border-white/14 bg-[#123B4A]/64 p-4 shadow-[0_10px_26px_rgba(1,8,14,0.38)] transition-all duration-300 hover:-translate-y-0.5 hover:border-[#00F0FF]/35"
                   >
-                    <div className="absolute inset-x-0 top-0 h-1 bg-gradient-to-r from-transparent via-[#00F0FF]/70 to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
+                    <div className="absolute inset-x-0 top-0 h-1 bg-linear-to-r from-transparent via-[#00F0FF]/70 to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
                     <div className="flex items-center justify-between gap-2">
                       <Badge className="border border-[#00F0FF]/35 bg-[#00F0FF]/20 text-[#00F0FF]">
                         {course.tag}
@@ -314,18 +316,20 @@ export function HomePremium({ featuredCourses, quickTips }: HomePremiumProps) {
                     </p>
                     <div className="mt-4 grid grid-cols-2 gap-2">
                       <Button
+                        asChild
                         size="sm"
                         variant="outline"
                         className="border-white/25 bg-transparent text-[11px] font-black uppercase tracking-[0.12em] text-slate-100 hover:bg-white/10"
                       >
-                        Ver detalhes
+                        <Link href="/cursos#catalogo">Ver detalhes</Link>
                       </Button>
-                      <Button
-                        size="sm"
-                        className="cta-cyan text-[11px] font-black uppercase tracking-[0.12em]"
-                      >
-                        Matricular agora
-                      </Button>
+                      <ServiceRequestDialog
+                        triggerText="Matricular agora"
+                        title="Solicite sua matrícula"
+                        description={`Informe seus dados para a equipe SCVP orientar a matrícula em ${course.title}.`}
+                        triggerClassName="text-[11px] tracking-[0.12em]"
+                        triggerSize="sm"
+                      />
                     </div>
                   </article>
                 ))}
@@ -345,7 +349,7 @@ export function HomePremium({ featuredCourses, quickTips }: HomePremiumProps) {
                   onClick={() => setSelectedStory(story)}
                   className="group space-y-2 text-center"
                 >
-                  <span className="mx-auto flex size-[64px] items-center justify-center rounded-full border border-[#00F0FF] p-[2px] transition-transform duration-300 group-hover:scale-105">
+                  <span className="mx-auto flex size-16 items-center justify-center rounded-full border border-[#00F0FF] p-0.5 transition-transform duration-300 group-hover:scale-105">
                     <span className="relative flex size-full items-center justify-center rounded-full border border-[#00F0FF]/65 bg-[#001A22] text-[#00F0FF] shadow-[0_0_16px_rgba(0,240,255,0.32)]">
                       <span className="absolute inset-1 rounded-full border border-[#00F0FF]/30" />
                       <Play className="size-5" />
@@ -454,7 +458,11 @@ export function HomePremium({ featuredCourses, quickTips }: HomePremiumProps) {
         title="Planner estratégico"
         subtitle="Receba a rota inicial de estudos no celular"
       >
-        <Button className="cta-cyan">Quero começar</Button>
+        <ServiceRequestDialog
+          triggerText="Quero começar"
+          title="Receba sua rota inicial"
+          description="Informe seus dados para liberar o planner estratégico e uma indicação de próximos passos."
+        />
       </StickyMobileCta>
 
       <Footer />

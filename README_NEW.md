@@ -60,11 +60,11 @@ scvp-mockup/
 │   │   └── api/            # API routes
 │   │       └── scvp/       # SCVP endpoints
 │   ├── components/         # React components
-│   │   ├── scvp/          # Componentes SCVP específicos
-│   │   └── ui/            # Componentes genéricos
-│   ├── lib/               # Utilitários e tipos
+│   │   ├── ui/            # Componentes base do design system
+│   │   ├── layout/        # Navbar, footer, shell e CTA mobile
+│   │   └── views/         # Telas reais e componentes compartilhados
+│   ├── core/              # Dados mock, tipos, serviços e utilitários
 │   ├── styles/            # Estilos globais
-│   └── types/             # Tipos TypeScript
 ├── package.json           # Dependências
 ├── tsconfig.json          # Config TypeScript
 ├── next.config.ts         # Config Next.js

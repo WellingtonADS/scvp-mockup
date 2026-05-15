@@ -10,9 +10,9 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
-import { cn } from "@/lib/utils";
+import { cn } from "@/core/utils";
 
-type LeadCaptureDialogProps = {
+type ServiceRequestDialogProps = {
   triggerText: string;
   title?: string;
   description?: string;
@@ -20,13 +20,13 @@ type LeadCaptureDialogProps = {
   triggerSize?: "default" | "sm" | "lg";
 };
 
-export function LeadCaptureDialog({
+export function ServiceRequestDialog({
   triggerText,
   title = "Receba seu planner estratégico gratuito",
   description = "Preencha os dados para liberar materiais exclusivos, alertas e trilhas recomendadas.",
   triggerClassName,
   triggerSize = "lg",
-}: LeadCaptureDialogProps) {
+}: ServiceRequestDialogProps) {
   return (
     <Dialog>
       <DialogTrigger asChild>

@@ -1,6 +1,5 @@
 "use client";
 
-import { Button } from "@/components/ui/button";
 import {
   Dialog,
   DialogContent,
@@ -9,117 +8,107 @@ import {
   DialogTitle,
 } from "@/components/ui/dialog";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import type { AlertItem, FilterOption } from "@/lib/scvp-types";
-import { ChevronLeft, ChevronRight, CirclePlay, Play } from "lucide-react";
+import type { Course, FilterOption } from "@/core/types";
+import { paginateItems } from "@/core/utils";
+import { CirclePlay, Play } from "lucide-react";
 import { useMemo, useState } from "react";
-import { AlertCard } from "./alert-card";
+import { BrowseEmptyState, BrowsePagination } from "./browse-shared";
+import { CourseCard } from "./course-card";
 import { FilterPanel } from "./filter-panel";
 
-type AlertsBrowserProps = {
-  items: AlertItem[];
+type CoursesBrowserProps = {
+  items: Course[];
   filters: {
     careers: FilterOption[];
     organs: FilterOption[];
-    states: FilterOption[];
   };
 };
 
 const PAGE_SIZE = 12;
 
-const editalTips = [
+const courseTips = [
   {
-    id: "janela-inscricao",
-    label: "Inscrição",
-    caption: "Não perca prazo",
+    id: "dica-penal",
+    label: "Dica Penal",
+    caption: "Art. 121 em prova",
     videoUrl: "https://www.youtube.com/embed/6xKWiCMKKJg",
   },
   {
-    id: "banca",
-    label: "Banca",
-    caption: "Perfil de cobrança",
+    id: "edital-prf",
+    label: "Edital PRF",
+    caption: "Como ler cobrança",
     videoUrl: "https://www.youtube.com/embed/6xKWiCMKKJg",
   },
   {
-    id: "salario",
-    label: "Salário",
-    caption: "Valor estratégico",
+    id: "metodo-8020",
+    label: "Método 80/20",
+    caption: "Ciclos de revisão",
     videoUrl: "https://www.youtube.com/embed/6xKWiCMKKJg",
   },
   {
-    id: "vagas",
-    label: "Vagas",
-    caption: "Leitura realista",
+    id: "aprovados",
+    label: "Aprovados",
+    caption: "História de sucesso",
     videoUrl: "https://www.youtube.com/embed/6xKWiCMKKJg",
   },
   {
-    id: "prova",
-    label: "Prova",
-    caption: "Reta final",
+    id: "reta-final",
+    label: "Reta final",
+    caption: "Prioridade semanal",
     videoUrl: "https://www.youtube.com/embed/6xKWiCMKKJg",
   },
   {
-    id: "prioridade",
-    label: "Prioridade",
-    caption: "Escolha 80/20",
+    id: "simulados",
+    label: "Simulados",
+    caption: "Correção estratégica",
     videoUrl: "https://www.youtube.com/embed/6xKWiCMKKJg",
   },
 ];
 
-export function AlertsBrowser({ items, filters }: AlertsBrowserProps) {
+export function CoursesBrowser({ items, filters }: CoursesBrowserProps) {
   const [activeTab, setActiveTab] = useState("todos");
   const [currentPage, setCurrentPage] = useState(1);
   const [selectedTip, setSelectedTip] = useState<
-    (typeof editalTips)[number] | null
+    (typeof courseTips)[number] | null
   >(null);
   const [appliedFilters, setAppliedFilters] = useState({
     career: "",
     organ: "",
-    state: "",
   });
 
-  const filteredAlerts = useMemo(
+  const filteredCourses = useMemo(
     () =>
-      items.filter((alert) => {
-        if (activeTab === "aberto" && alert.status !== "Aberto") return false;
-        if (activeTab === "proximo" && alert.status !== "Próximo") return false;
-        if (activeTab === "encerrado" && alert.status !== "Encerrado")
+      items.filter((course) => {
+        if (activeTab === "online" && course.mode !== "Online") return false;
+        if (activeTab === "presencial" && course.mode !== "Presencial")
           return false;
-        if (appliedFilters.career && alert.career !== appliedFilters.career)
+        if (activeTab === "mentoria" && course.mode !== "Mentoria")
           return false;
-        if (appliedFilters.organ && alert.orgao !== appliedFilters.organ)
+        if (appliedFilters.career && course.career !== appliedFilters.career)
           return false;
-        if (appliedFilters.state && alert.state !== appliedFilters.state)
+        if (appliedFilters.organ && course.organ !== appliedFilters.organ)
           return false;
         return true;
       }),
-    [
-      activeTab,
-      appliedFilters.career,
-      appliedFilters.organ,
-      appliedFilters.state,
-      items,
-    ],
+    [activeTab, appliedFilters.career, appliedFilters.organ, items],
   );
 
-  const pageCount = Math.max(1, Math.ceil(filteredAlerts.length / PAGE_SIZE));
-  const activePage = Math.min(currentPage, pageCount);
-  const visibleAlerts = filteredAlerts.slice(
-    (activePage - 1) * PAGE_SIZE,
-    activePage * PAGE_SIZE,
-  );
-  const firstResult = filteredAlerts.length
-    ? (activePage - 1) * PAGE_SIZE + 1
-    : 0;
-  const lastResult = Math.min(activePage * PAGE_SIZE, filteredAlerts.length);
-  const pages = Array.from({ length: pageCount }, (_, index) => index + 1);
+  const {
+    activePage,
+    firstResult,
+    lastResult,
+    pageCount,
+    pages,
+    visibleItems,
+  } = paginateItems(filteredCourses, currentPage, PAGE_SIZE);
 
   return (
     <>
       <FilterPanel
-        title="Editais abertos e próximos"
-        description="Filtre carreira, órgão e estado antes de navegar pelos status."
-        actionLabel="Atualizar alertas"
-        resultsLabel={`${filteredAlerts.length} editais encontrados`}
+        title="Encontre sua preparação ideal"
+        description="Filtre por carreira e órgão antes de navegar pelos formatos."
+        actionLabel="Aplicar filtros"
+        resultsLabel={`${filteredCourses.length} cursos encontrados`}
         fields={[
           {
             id: "career",
@@ -135,24 +124,16 @@ export function AlertsBrowser({ items, filters }: AlertsBrowserProps) {
             options: filters.organs,
             value: appliedFilters.organ,
           },
-          {
-            id: "state",
-            label: "Estado",
-            placeholder: "Todos os estados",
-            options: filters.states,
-            value: appliedFilters.state,
-          },
         ]}
         onApply={(values) => {
           setAppliedFilters({
             career: values.career ?? "",
             organ: values.organ ?? "",
-            state: values.state ?? "",
           });
           setCurrentPage(1);
         }}
         onReset={() => {
-          setAppliedFilters({ career: "", organ: "", state: "" });
+          setAppliedFilters({ career: "", organ: "" });
           setCurrentPage(1);
         }}
       />
@@ -177,122 +158,81 @@ export function AlertsBrowser({ items, filters }: AlertsBrowserProps) {
           </TabsTrigger>
           <TabsTrigger
             className="rounded-full border border-white/15 px-4 py-1.5 text-[10px] font-black uppercase tracking-[0.17em] data-[state=active]:border-[#00F0FF]/70 data-[state=active]:bg-[#00F0FF]/14 data-[state=active]:text-[#00F0FF]"
-            value="aberto"
+            value="online"
           >
-            Aberto
+            Online
           </TabsTrigger>
           <TabsTrigger
             className="rounded-full border border-white/15 px-4 py-1.5 text-[10px] font-black uppercase tracking-[0.17em] data-[state=active]:border-[#00F0FF]/70 data-[state=active]:bg-[#00F0FF]/14 data-[state=active]:text-[#00F0FF]"
-            value="proximo"
+            value="presencial"
           >
-            Próximo
+            Presencial
           </TabsTrigger>
           <TabsTrigger
             className="rounded-full border border-white/15 px-4 py-1.5 text-[10px] font-black uppercase tracking-[0.17em] data-[state=active]:border-[#00F0FF]/70 data-[state=active]:bg-[#00F0FF]/14 data-[state=active]:text-[#00F0FF]"
-            value="encerrado"
+            value="mentoria"
           >
-            Encerrado
+            Mentorias
           </TabsTrigger>
         </TabsList>
 
         <TabsContent value={activeTab} className="pt-4">
-          {filteredAlerts.length ? (
+          {filteredCourses.length ? (
             <>
               <div className="mb-4 flex flex-wrap items-center justify-between gap-3 text-xs text-slate-300">
                 <p className="font-bold uppercase tracking-[0.16em] text-[#00F0FF]">
-                  {filteredAlerts.length} editais encontrados
+                  {filteredCourses.length} cursos encontrados
                 </p>
                 <p>
-                  Exibindo {firstResult}-{lastResult} de {filteredAlerts.length}
+                  Exibindo {firstResult}-{lastResult} de{" "}
+                  {filteredCourses.length}
                 </p>
               </div>
               <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-                {visibleAlerts.map((alert) => (
-                  <AlertCard key={alert.id} alert={alert} />
+                {visibleItems.map((course) => (
+                  <CourseCard key={course.id} course={course} />
                 ))}
               </div>
             </>
           ) : (
-            <div className="glass-card rounded-[28px] border-white/12 p-8 text-center">
-              <p className="text-sm font-black uppercase tracking-[0.18em] text-[#00F0FF]">
-                Nenhum edital nessa combinação
-              </p>
-              <p className="mt-3 text-sm text-slate-300">
-                Limpe os filtros ou altere a aba para ampliar o monitoramento.
-              </p>
-            </div>
+            <BrowseEmptyState
+              title="Nenhum curso encontrado"
+              description="Ajuste a combinação de carreira e órgão para ampliar os resultados."
+            />
           )}
         </TabsContent>
       </Tabs>
 
-      {filteredAlerts.length ? (
-        <nav
-          className="mt-6 flex flex-wrap items-center justify-center gap-2"
-          aria-label="Paginação de editais"
-        >
-          <Button
-            type="button"
-            variant="outline"
-            size="sm"
-            disabled={activePage === 1}
-            onClick={() => setCurrentPage((page) => Math.max(1, page - 1))}
-            className="h-9 border-white/15 bg-white/5 px-3 text-slate-100 hover:bg-white/10 disabled:opacity-40"
-          >
-            <ChevronLeft className="size-4" />
-            <span className="sr-only">Página anterior</span>
-          </Button>
-          {pages.map((page) => (
-            <Button
-              key={page}
-              type="button"
-              variant={page === activePage ? "default" : "outline"}
-              size="sm"
-              onClick={() => setCurrentPage(page)}
-              className={
-                page === activePage
-                  ? "cta-cyan h-9 min-w-9 px-3 text-xs font-black"
-                  : "h-9 min-w-9 border-white/15 bg-white/5 px-3 text-xs font-black text-slate-100 hover:bg-white/10"
-              }
-            >
-              {page}
-            </Button>
-          ))}
-          <Button
-            type="button"
-            variant="outline"
-            size="sm"
-            disabled={activePage === pageCount}
-            onClick={() =>
-              setCurrentPage((page) => Math.min(pageCount, page + 1))
-            }
-            className="h-9 border-white/15 bg-white/5 px-3 text-slate-100 hover:bg-white/10 disabled:opacity-40"
-          >
-            <ChevronRight className="size-4" />
-            <span className="sr-only">Próxima página</span>
-          </Button>
-        </nav>
+      {filteredCourses.length ? (
+        <BrowsePagination
+          activePage={activePage}
+          pageCount={pageCount}
+          pages={pages}
+          ariaLabel="Paginação de cursos"
+          onPageChange={setCurrentPage}
+        />
       ) : null}
 
       <section
-        id="dicas-editais"
+        id="dicas-cursos"
         className="mt-10 rounded-[10px] border border-white/14 bg-[#123B4A]/62 p-4 shadow-[0_10px_26px_rgba(1,8,14,0.38)] sm:p-5"
       >
         <div className="flex flex-wrap items-end justify-between gap-3">
           <div>
             <p className="text-[10px] font-black uppercase tracking-[0.18em] text-[#00F0FF]">
-              Radar rápido
+              Conteúdo rápido
             </p>
             <h2 className="mt-1 font-heading text-xl font-extrabold uppercase tracking-tight text-slate-50">
-              Últimas dicas de editais
+              Últimas dicas Quer Passou
             </h2>
           </div>
           <p className="max-w-md text-xs leading-5 text-slate-400">
-            Pílulas para priorizar edital, entender banca e decidir onde
-            concentrar energia.
+            Pílulas para revisar edital, método e estratégia antes de escolher a
+            trilha.
           </p>
         </div>
         <div className="mt-5 grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-6">
-          {editalTips.map((tip) => (
+          {courseTips.map((tip) => (
             <button
               key={tip.id}
               type="button"

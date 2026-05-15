@@ -1,4 +1,4 @@
-import { materials } from "@/lib/scvp-materials-data";
+import { materials } from "@/core/constants";
 import { NextResponse } from "next/server";
 
 export async function GET() {

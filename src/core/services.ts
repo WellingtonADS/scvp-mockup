@@ -1,3 +1,10 @@
+import {
+  alerts,
+  courses,
+  materials,
+  quickTips,
+  testimonials,
+} from "@/core/constants";
 import type {
   AlertFilters,
   AlertItem,
@@ -5,61 +12,13 @@ import type {
   Course,
   CourseFilters,
   CoursesBrowseData,
-  FilterOption,
   HomePageData,
   Material,
   MaterialFilters,
   MaterialsBrowseData,
   Testimonial,
-} from "@/lib/scvp-types";
-import { headers } from "next/headers";
-
-const API_ROOT = "/api/scvp";
-
-async function getBaseUrl() {
-  const requestHeaders = (await headers()) as unknown as Record<
-    string,
-    string
-  > & {
-    get?: (name: string) => string | null;
-  };
-  const host =
-    typeof requestHeaders.get === "function"
-      ? requestHeaders.get("host")
-      : requestHeaders.host;
-  const protocol =
-    typeof requestHeaders.get === "function"
-      ? (requestHeaders.get("x-forwarded-proto") ?? "http")
-      : (requestHeaders["x-forwarded-proto"] ?? "http");
-
-  if (!host) {
-    return "http://localhost:3000";
-  }
-
-  return `${protocol}://${host}`;
-}
-
-async function fetchApi<T>(path: string): Promise<T> {
-  const response = await fetch(`${await getBaseUrl()}${API_ROOT}${path}`, {
-    cache: "no-store",
-  });
-
-  if (!response.ok) {
-    throw new Error(`Falha ao carregar dados SCVP em ${path}`);
-  }
-
-  return response.json() as Promise<T>;
-}
-
-function toFilterOptions(values: string[]): FilterOption[] {
-  return values.map((value) => ({ label: value, value }));
-}
-
-function uniqueValues(values: string[]) {
-  return [...new Set(values)].sort((left, right) =>
-    left.localeCompare(right, "pt-BR"),
-  );
-}
+} from "@/core/types";
+import { toFilterOptions, uniqueValues } from "@/core/utils";
 
 export function filterCourses(items: Course[], filters: CourseFilters) {
   return items.filter((course) => {
@@ -89,11 +48,15 @@ export function filterMaterials(items: Material[], filters: MaterialFilters) {
 }
 
 export async function getHomePageData(): Promise<HomePageData> {
-  return fetchApi<HomePageData>("/home");
+  return {
+    quickTips,
+    featuredCourses: courses.slice(0, 6),
+    testimonials,
+  };
 }
 
 export async function getCourses(): Promise<Course[]> {
-  return fetchApi<Course[]>("/courses");
+  return courses;
 }
 
 export async function getCoursesBrowseData(): Promise<CoursesBrowseData> {
@@ -113,7 +76,7 @@ export async function getCoursesBrowseData(): Promise<CoursesBrowseData> {
 }
 
 export async function getAlerts(): Promise<AlertItem[]> {
-  return fetchApi<AlertItem[]>("/alerts");
+  return alerts;
 }
 
 export async function getAlertsBrowseData(): Promise<AlertsBrowseData> {
@@ -132,7 +95,7 @@ export async function getAlertsBrowseData(): Promise<AlertsBrowseData> {
 }
 
 export async function getMaterials(): Promise<Material[]> {
-  return fetchApi<Material[]>("/materials");
+  return materials;
 }
 
 export async function getMaterialsBrowseData(): Promise<MaterialsBrowseData> {
@@ -152,6 +115,5 @@ export async function getMaterialsBrowseData(): Promise<MaterialsBrowseData> {
 }
 
 export async function getTestimonials(): Promise<Testimonial[]> {
-  const data = await fetchApi<HomePageData>("/home");
-  return data.testimonials ?? [];
+  return testimonials;
 }
