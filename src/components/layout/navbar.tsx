@@ -118,14 +118,14 @@ export function Navbar() {
                     asChild
                     size="lg"
                     variant="outline"
-                    className="h-12 border-white/15 bg-transparent text-slate-100 hover:bg-white/10"
+                    className="h-12 border-white/15 bg-transparent text-slate-100 hover:bg-white/10 hover:text-slate-100"
                   >
                     <Link href={studentAreaHref}>Área do Aluno</Link>
                   </Button>
                   <Button
                     asChild
                     size="lg"
-                    className="cta-cyan h-13 font-bold uppercase tracking-wide"
+                    className="cta-cyan h-12 font-bold uppercase tracking-wide"
                   >
                     <Link href="/cursos">Quero começar agora</Link>
                   </Button>

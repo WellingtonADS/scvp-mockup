@@ -60,7 +60,7 @@ export function MaterialCard({ material }: MaterialCardProps) {
           asChild
           size="sm"
           variant="outline"
-          className="border-white/25 bg-transparent text-[11px] font-black uppercase tracking-[0.12em] text-slate-100 hover:bg-white/10"
+          className="border-white/25 bg-transparent text-[11px] font-black uppercase tracking-[0.12em] text-slate-100 hover:bg-white/10 hover:text-slate-100"
         >
           <Link href="/hub#materiais">Ver detalhes</Link>
         </Button>

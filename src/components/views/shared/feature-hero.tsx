@@ -9,15 +9,6 @@ type FeatureHeroProps = {
   titleClassName?: string;
 };
 
-const heroTiles = [
-  "bg-[linear-gradient(135deg,#0b5160,#123844)]",
-  "bg-[linear-gradient(135deg,#123844,#0f2f3b)]",
-  "bg-[linear-gradient(135deg,#0a4452,#072d37)]",
-  "bg-[linear-gradient(135deg,#0a4452,#0e3a46)]",
-  "bg-[linear-gradient(135deg,#09313c,#0a4452)]",
-  "bg-[linear-gradient(135deg,#0d5867,#123844)]",
-];
-
 export function FeatureHero({
   badge,
   title,
@@ -29,23 +20,16 @@ export function FeatureHero({
   return (
     <section className="relative overflow-hidden border-b border-white/10 py-4 sm:py-5">
       <div className="absolute inset-0 hero-gradient" />
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_82%_18%,rgba(0,240,255,0.16),transparent_38%)]" />
       <div className="section-shell relative">
-        <article className="relative overflow-hidden rounded-[18px] border border-[#4d5f6d]/45 bg-[#0A2A36] p-3 shadow-[0_18px_45px_rgba(1,8,14,0.45)] sm:p-5">
-          <div className="absolute inset-0 bg-[radial-gradient(circle_at_78%_18%,rgba(0,240,255,0.22),transparent_36%)]" />
-          <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(2,6,23,0.78)_0%,rgba(2,6,23,0.3)_45%,rgba(2,6,23,0.1)_100%)]" />
-          <div className="absolute inset-0 grid grid-cols-3 grid-rows-2 gap-1.5 p-1.5 opacity-45">
-            {heroTiles.map((tileClassName) => (
-              <div
-                key={tileClassName}
-                className={`rounded-lg border border-white/20 ${tileClassName}`}
-              />
-            ))}
-          </div>
-          <div className="pointer-events-none absolute inset-x-3 top-3 h-9 rounded-md border border-[#5b717f]/45 bg-[#0c3a47]/55" />
-          <span className="absolute left-3 top-3 h-2.5 w-2.5 rounded-full bg-[#00F0FF] shadow-[0_0_12px_rgba(0,240,255,0.7)]" />
-          <span className="absolute right-3 top-3 h-2.5 w-2.5 rounded-full bg-[#f59e0b]" />
+        <article className="relative overflow-hidden rounded-[20px] border border-[#5f7280]/45 bg-[#062634]/88 px-4 py-5 shadow-[0_18px_44px_rgba(1,8,14,0.42)] backdrop-blur-[1.5px] sm:px-7 sm:py-7">
+          <div className="absolute inset-0 bg-[linear-gradient(110deg,rgba(2,6,23,0.86)_0%,rgba(2,6,23,0.62)_52%,rgba(2,6,23,0.28)_100%)]" />
+          <div className="absolute inset-0 opacity-30 [background:repeating-linear-gradient(90deg,rgba(148,163,184,0.16)_0px,rgba(148,163,184,0.16)_1px,transparent_1px,transparent_120px)]" />
+          <div className="pointer-events-none absolute -right-20 top-1/2 h-60 w-60 -translate-y-1/2 rounded-full border border-[#00F0FF]/20" />
+          <div className="pointer-events-none absolute -right-8 top-1/2 h-36 w-36 -translate-y-1/2 rounded-full border border-[#00F0FF]/30" />
+          <div className="pointer-events-none absolute -bottom-12 left-12 h-24 w-44 rounded-full bg-[#00F0FF]/12 blur-2xl" />
 
-          <div className="relative z-10 flex flex-col justify-end gap-3 pt-14 sm:min-h-56 lg:min-h-60">
+          <div className="relative z-10 flex flex-col justify-end gap-3 sm:min-h-52 lg:min-h-56">
             <Badge className="w-fit border border-amber-300/35 bg-amber-500/18 text-[11px] font-bold uppercase tracking-[0.14em] text-amber-300">
               {badge}
             </Badge>
@@ -54,6 +38,10 @@ export function FeatureHero({
             >
               {title}
             </h1>
+            <div className="flex items-center gap-2.5">
+              <span className="h-px w-16 bg-[linear-gradient(90deg,rgba(0,240,255,0.9),rgba(0,240,255,0.16))] sm:w-24" />
+              <span className="h-2 w-2 rounded-full bg-[#00F0FF] shadow-[0_0_12px_rgba(0,240,255,0.68)]" />
+            </div>
             <p className="max-w-2xl text-sm leading-relaxed text-slate-200 sm:text-base">
               {description}
             </p>

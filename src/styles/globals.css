@@ -66,7 +66,7 @@
 
     /* Action Cyan #00F0FF */
     --primary: 184 100% 50%;
-    --primary-foreground: 191 100% 11%;
+    --primary-foreground: 191 100% 16%;
 
     /* Teal Deep #002D37 */
     --secondary: 191 100% 11%;
@@ -76,7 +76,7 @@
     --muted-foreground: 215 20.2% 65.1%;
 
     --accent: 184 100% 50%;
-    --accent-foreground: 191 100% 11%;
+    --accent-foreground: 191 100% 16%;
 
     --destructive: 0 62.8% 30.6%;
     --destructive-foreground: 210 40% 98%;
@@ -94,7 +94,7 @@
     --sidebar: 229 84% 5%;
     --sidebar-foreground: 210 40% 98%;
     --sidebar-primary: 184 100% 50%;
-    --sidebar-primary-foreground: 191 100% 11%;
+    --sidebar-primary-foreground: 191 100% 16%;
     --sidebar-accent: 191 100% 11%;
     --sidebar-accent-foreground: 210 40% 98%;
     --sidebar-border: 191 100% 15%;
@@ -121,7 +121,7 @@
 
 @layer utilities {
   .cta-cyan {
-    @apply bg-[#00F0FF] text-[#001A22] transition-all duration-300 hover:shadow-[0_0_22px_rgba(0,240,255,0.45)] active:scale-[0.99];
+    @apply bg-[#00F0FF] text-[#001A22] transition-all duration-300 hover:bg-[#58F7FF] hover:text-[#001319] hover:shadow-[0_0_24px_rgba(0,240,255,0.55)] focus-visible:ring-2 focus-visible:ring-[#7AF9FF]/70 focus-visible:ring-offset-2 focus-visible:ring-offset-[#020617] active:scale-[0.99];
   }
 
   .glass-card {

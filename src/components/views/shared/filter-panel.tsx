@@ -145,7 +145,7 @@ export function FilterPanel({
           <Button
             variant="outline"
             onClick={handleReset}
-            className="h-12 w-full border-white/15 bg-white/5 font-semibold uppercase tracking-wide text-slate-100 hover:bg-white/10"
+            className="h-12 w-full border-white/15 bg-white/5 font-semibold uppercase tracking-wide text-slate-100 hover:bg-white/10 hover:text-slate-100"
           >
             Limpar
           </Button>
@@ -179,7 +179,7 @@ export function FilterPanel({
           <DrawerTrigger asChild>
             <Button
               variant="outline"
-              className="h-11 rounded-full border-white/15 bg-white/5 px-4 text-slate-100 hover:bg-white/10"
+              className="h-11 rounded-full border-white/15 bg-white/5 px-4 text-slate-100 hover:bg-white/10 hover:text-slate-100"
             >
               <SlidersHorizontal className="size-4" />
               Filtrar
@@ -214,7 +214,7 @@ export function FilterPanel({
               <Button
                 variant="outline"
                 onClick={handleReset}
-                className="h-12 w-full border-white/15 bg-white/5 font-semibold uppercase tracking-wide text-slate-100 hover:bg-white/10"
+                className="h-12 w-full border-white/15 bg-white/5 font-semibold uppercase tracking-wide text-slate-100 hover:bg-white/10 hover:text-slate-100"
               >
                 Limpar filtros
               </Button>

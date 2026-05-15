@@ -80,7 +80,7 @@ export function AlertCard({ alert }: AlertCardProps) {
             <Button
               size="sm"
               variant="outline"
-              className="h-8 border-white/25 bg-transparent text-[10px] font-black uppercase tracking-[0.08em] text-slate-100 hover:bg-white/10"
+              className="h-8 border-white/25 bg-transparent text-[10px] font-black uppercase tracking-[0.08em] text-slate-100 hover:bg-white/10 hover:text-slate-100"
             >
               Ver edital
             </Button>

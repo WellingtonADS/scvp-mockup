@@ -52,7 +52,7 @@ export function BrowsePagination({
         size="sm"
         disabled={activePage === 1}
         onClick={() => onPageChange(Math.max(1, activePage - 1))}
-        className="h-9 border-white/15 bg-white/5 px-3 text-slate-100 hover:bg-white/10 disabled:opacity-40"
+        className="h-9 border-white/15 bg-white/5 px-3 text-slate-100 hover:bg-white/10 hover:text-slate-100 disabled:opacity-40"
       >
         <ChevronLeft className="size-4" />
         <span className="sr-only">Página anterior</span>
@@ -67,7 +67,7 @@ export function BrowsePagination({
           className={
             page === activePage
               ? "cta-cyan h-9 min-w-9 px-3 text-xs font-black"
-              : "h-9 min-w-9 border-white/15 bg-white/5 px-3 text-xs font-black text-slate-100 hover:bg-white/10"
+              : "h-9 min-w-9 border-white/15 bg-white/5 px-3 text-xs font-black text-slate-100 hover:bg-white/10 hover:text-slate-100"
           }
         >
           {page}
@@ -79,7 +79,7 @@ export function BrowsePagination({
         size="sm"
         disabled={activePage === pageCount}
         onClick={() => onPageChange(Math.min(pageCount, activePage + 1))}
-        className="h-9 border-white/15 bg-white/5 px-3 text-slate-100 hover:bg-white/10 disabled:opacity-40"
+        className="h-9 border-white/15 bg-white/5 px-3 text-slate-100 hover:bg-white/10 hover:text-slate-100 disabled:opacity-40"
       >
         <ChevronRight className="size-4" />
         <span className="sr-only">Próxima página</span>
