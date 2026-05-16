@@ -3,6 +3,7 @@ import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import type { Course } from "@/core/types";
 import { FileText, Video } from "lucide-react";
+import Image from "next/image";
 import Link from "next/link";
 import { ServiceRequestDialog } from "./service-request-dialog";
 
@@ -10,10 +11,25 @@ type CourseCardProps = {
   course: Course;
 };
 
+const courseCoverImages = [
+  "/assets/producao/capas/capa-01.png",
+  "/assets/producao/capas/capa-02.png",
+  "/assets/producao/capas/capa-03.png",
+];
+
+function pickImageByEntityId(id: string, images: string[]) {
+  const numericPart = Number.parseInt(id.replace(/\D/g, ""), 10);
+  const safeIndex = Number.isNaN(numericPart)
+    ? 0
+    : (numericPart - 1) % images.length;
+  return images[safeIndex];
+}
+
 export function CourseCard({ course }: CourseCardProps) {
   const [priceValue, priceSuffix] = course.price.split("/");
   const showModeLabel =
     course.tag.trim().toLowerCase() !== course.mode.trim().toLowerCase();
+  const coverImage = pickImageByEntityId(course.id, courseCoverImages);
 
   return (
     <Card className="group relative mx-auto w-full max-w-88 gap-0 overflow-hidden rounded-[10px] border border-white/14 bg-[#123B4A]/64 p-2.5 shadow-[0_10px_26px_rgba(1,8,14,0.38)] transition-all duration-300 hover:-translate-y-0.5 hover:border-[#00F0FF] hover:shadow-[0_0_26px_rgba(0,240,255,0.18)] sm:p-3">
@@ -27,6 +43,17 @@ export function CourseCard({ course }: CourseCardProps) {
             {course.mode}
           </p>
         ) : null}
+      </div>
+
+      <div className="relative mt-2 aspect-video overflow-hidden rounded-[8px] border border-white/12 bg-[#00212A]">
+        <Image
+          src={coverImage}
+          alt={`Capa do curso ${course.title}`}
+          fill
+          className="object-cover transition-transform duration-500 group-hover:scale-[1.03]"
+          sizes="(max-width: 768px) 100vw, 320px"
+        />
+        <div className="pointer-events-none absolute inset-0 bg-linear-to-t from-[#00151D]/70 via-transparent to-transparent" />
       </div>
 
       <p className="mt-2 text-[10px] font-semibold uppercase tracking-[0.14em] text-slate-300">

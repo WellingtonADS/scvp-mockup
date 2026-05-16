@@ -1,6 +1,7 @@
 "use client";
 
 import { Check, CirclePlay, Play, X } from "lucide-react";
+import Image from "next/image";
 import { useEffect, useMemo, useState } from "react";
 
 import { Button } from "@/components/ui/button";
@@ -66,6 +67,24 @@ const homePageConfig = {
     },
   },
 } satisfies ConversionPageConfig;
+
+const socialProofTiles = [
+  {
+    image: "/assets/producao/alunos/aluno-01.png",
+    title: "Resultados reais",
+    subtitle: "Aprovados com metodo e acompanhamento",
+  },
+  {
+    image: "/assets/producao/posts/post-01.png",
+    title: "Rotina orientada",
+    subtitle: "Conteudo objetivo para execução semanal",
+  },
+  {
+    image: "/assets/producao/alunos/aluno-02.png",
+    title: "Comunidade ativa",
+    subtitle: "Rede de apoio para manter constancia",
+  },
+];
 
 export function HomeView({ featuredCourses, quickTips }: HomeViewProps) {
   const [activeTab, setActiveTab] = useState("TODOS");
@@ -197,6 +216,39 @@ export function HomeView({ featuredCourses, quickTips }: HomeViewProps) {
                 </button>
               ))}
             </div>
+          </div>
+        </section>
+
+        <section className="section-shell py-1 sm:py-2">
+          <div className="grid gap-3 sm:grid-cols-3">
+            {socialProofTiles.map((tile) => (
+              <article
+                key={tile.title}
+                className="group relative overflow-hidden rounded-[10px] border border-white/14 bg-[#123B4A]/62 shadow-[0_10px_26px_rgba(1,8,14,0.38)]"
+              >
+                <div className="relative aspect-video">
+                  <Image
+                    src={tile.image}
+                    alt={tile.title}
+                    fill
+                    className="object-cover transition-transform duration-500 group-hover:scale-[1.03]"
+                    sizes="(max-width: 768px) 100vw, 420px"
+                  />
+                  <div className="absolute inset-0 bg-linear-to-t from-[#00141D]/85 via-[#00141D]/35 to-transparent" />
+                  <div className="absolute inset-x-0 bottom-0 p-3">
+                    <p className="text-[10px] font-black uppercase tracking-[0.16em] text-[#00F0FF]">
+                      SCVP
+                    </p>
+                    <h3 className="mt-1 font-heading text-base font-extrabold uppercase leading-tight text-white">
+                      {tile.title}
+                    </h3>
+                    <p className="mt-1 text-xs text-slate-300">
+                      {tile.subtitle}
+                    </p>
+                  </div>
+                </div>
+              </article>
+            ))}
           </div>
         </section>
 

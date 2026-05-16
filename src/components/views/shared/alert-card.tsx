@@ -14,11 +14,26 @@ import {
 } from "@/components/ui/drawer";
 import type { AlertItem } from "@/core/types";
 import { CalendarDays, Landmark, MapPin, UsersRound } from "lucide-react";
+import Image from "next/image";
 import { ServiceRequestDialog } from "./service-request-dialog";
 
 type AlertCardProps = {
   alert: AlertItem;
 };
+
+const alertThumbImages = [
+  "/assets/producao/posts/post-01.png",
+  "/assets/producao/posts/post-02.png",
+  "/assets/producao/posts/post-03.png",
+];
+
+function pickImageByEntityId(id: string, images: string[]) {
+  const numericPart = Number.parseInt(id.replace(/\D/g, ""), 10);
+  const safeIndex = Number.isNaN(numericPart)
+    ? 0
+    : (numericPart - 1) % images.length;
+  return images[safeIndex];
+}
 
 function statusClass(status: AlertItem["status"]) {
   if (status === "Aberto") return "bg-emerald-500/20 text-emerald-400";
@@ -27,6 +42,8 @@ function statusClass(status: AlertItem["status"]) {
 }
 
 export function AlertCard({ alert }: AlertCardProps) {
+  const thumbImage = pickImageByEntityId(alert.id, alertThumbImages);
+
   return (
     <Card className="group relative gap-0 overflow-hidden rounded-[10px] border border-white/14 bg-[#123B4A]/64 p-3 shadow-[0_10px_26px_rgba(1,8,14,0.38)] transition-all duration-300 hover:-translate-y-0.5 hover:border-[#00F0FF] hover:shadow-[0_0_26px_rgba(0,240,255,0.18)]">
       <div className="absolute inset-x-0 top-0 h-1 bg-linear-to-r from-transparent via-[#00F0FF]/70 to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
@@ -39,6 +56,16 @@ export function AlertCard({ alert }: AlertCardProps) {
         <p className="text-[11px] font-semibold text-slate-300">
           {alert.state}
         </p>
+      </div>
+      <div className="relative mt-2 aspect-video overflow-hidden rounded-[8px] border border-white/12 bg-[#00212A]">
+        <Image
+          src={thumbImage}
+          alt={`Imagem de apoio do edital ${alert.orgao}`}
+          fill
+          className="object-cover transition-transform duration-500 group-hover:scale-[1.03]"
+          sizes="(max-width: 768px) 100vw, 360px"
+        />
+        <div className="pointer-events-none absolute inset-0 bg-linear-to-t from-[#00151D]/75 via-transparent to-transparent" />
       </div>
       <p className="mt-2 text-[10px] font-semibold uppercase tracking-[0.14em] text-slate-300">
         {alert.career} • {alert.banca}
