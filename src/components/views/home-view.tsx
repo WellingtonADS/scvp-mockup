@@ -6,6 +6,7 @@ import Link from "next/link";
 import { useMemo } from "react";
 
 import { PageShell, StickyMobileCta } from "@/components/layout/page-shell";
+import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { CourseCard } from "@/components/views/shared/course-card";
 import { ServiceRequestDialog } from "@/components/views/shared/service-request-dialog";
@@ -81,14 +82,17 @@ export function HomeView({
           <article className="relative overflow-hidden">
             <div className="relative z-10 grid items-center gap-6 px-4 pt-5 pb-0 sm:px-6 sm:pt-7 sm:pb-0 lg:grid-cols-[1.1fr_0.9fr]">
               <div>
-                <p className="inline-flex w-fit items-center gap-2 rounded-full border border-[#00F0FF]/30 bg-[#00F0FF]/12 px-3 py-1 text-[10px] font-black uppercase tracking-[0.16em] text-[#8FFAFF]">
+                <Badge className="w-fit min-h-7 border border-amber-300/35 bg-amber-500/18 px-3 py-1 text-[11px] leading-[1.2] font-bold uppercase tracking-widest text-amber-300">
                   <Sparkles className="size-3" />
                   Aceleradora de aprovacao
-                </p>
-                <h1 className="mt-4 max-w-[12ch] font-heading text-4xl font-black uppercase leading-[0.92] text-white sm:text-5xl lg:text-6xl">
-                  Sua aprovacao nao e sorte. E engenharia.
+                </Badge>
+                <h1
+                  className="scvp-h1 mt-4 max-w-[12ch] uppercase lg:flex lg:h-50 lg:max-w-xl lg:items-center"
+                  style={{ lineHeight: 1.16 }}
+                >
+                  Sua aprovação é nossa meta.
                 </h1>
-                <p className="mt-4 max-w-xl text-base text-slate-200 sm:text-xl">
+                <p className="scvp-body-lg mt-4 max-w-xl">
                   Domine os concursos mais disputados com o Metodo 80/20 e
                   Inteligencia do Norte.
                 </p>
@@ -138,10 +142,10 @@ export function HomeView({
                   key={metric.value}
                   className="flex min-h-28 flex-col justify-center p-4 sm:min-h-30 sm:p-5"
                 >
-                  <p className="font-heading text-4xl font-black leading-none text-white">
+                  <p className="scvp-h2 leading-none text-white">
                     {metric.value}
                   </p>
-                  <p className="mt-2 max-w-[24ch] text-sm text-slate-300">
+                  <p className="scvp-body-sm mt-2 max-w-[24ch] text-slate-300">
                     {metric.label}
                   </p>
                 </article>
@@ -155,7 +159,7 @@ export function HomeView({
         <div className="pointer-events-none absolute inset-x-0 top-0 h-24 bg-[radial-gradient(ellipse_at_top,rgba(0,240,255,0.14),transparent_72%)]" />
         <div className="mb-4">
           <div>
-            <h2 className="font-heading text-3xl font-black leading-[0.95] text-white sm:text-4xl">
+            <h2 className="scvp-h2 leading-[0.95] text-white">
               Os Melhores do Mercado:
               <br />
               Comece Agora
@@ -207,7 +211,7 @@ export function HomeView({
                   <p className="text-sm font-black text-slate-100">
                     {testimonial.name}
                   </p>
-                  <p className="text-xs uppercase tracking-[0.13em] text-[#00F0FF]">
+                  <p className="scvp-label text-[#00F0FF]">
                     {testimonial.role}
                   </p>
                 </div>

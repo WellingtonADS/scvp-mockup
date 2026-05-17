@@ -35,13 +35,11 @@ export function CourseCard({ course }: CourseCardProps) {
     <Card className="surface-elevated group relative mx-auto w-full max-w-88 gap-0 overflow-hidden rounded-[10px] p-2.5 transition-all duration-300 hover:-translate-y-0.5 hover:border-[#00F0FF] hover:shadow-[0_0_26px_rgba(0,240,255,0.18)] sm:p-3">
       <div className="absolute inset-x-0 top-0 h-1 bg-linear-to-r from-transparent via-[#00F0FF]/70 to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
       <div className="flex items-center justify-between gap-2">
-        <Badge className="border border-[#00F0FF]/35 bg-[#00F0FF]/10 text-[10px] font-bold uppercase tracking-widest text-[#00F0FF]">
+        <Badge className="scvp-label scvp-label-pill scvp-label-pill-cyan font-bold">
           {course.tag}
         </Badge>
         {showModeLabel ? (
-          <p className="text-[11px] font-semibold text-slate-300">
-            {course.mode}
-          </p>
+          <p className="scvp-body-sm text-slate-300">{course.mode}</p>
         ) : null}
       </div>
 
@@ -59,7 +57,7 @@ export function CourseCard({ course }: CourseCardProps) {
       <p className="scvp-meta mt-2">
         {course.career} • {course.organ}
       </p>
-      <h3 className="scvp-title-card mt-1 line-clamp-2 min-h-8 text-[15px] sm:text-base">
+      <h3 className="scvp-title-card mt-1 line-clamp-2 min-h-8">
         {course.title}
       </h3>
       <div className="mt-2 flex flex-wrap items-center gap-x-2 gap-y-1 text-[10px] text-slate-300">
@@ -80,7 +78,7 @@ export function CourseCard({ course }: CourseCardProps) {
             </small>
           ) : null}
         </p>
-        <p className="mt-0.5 line-clamp-1 text-[10px] text-slate-400">
+        <p className="scvp-body-sm mt-0.5 line-clamp-1 text-slate-400">
           {course.schedule}
         </p>
       </div>

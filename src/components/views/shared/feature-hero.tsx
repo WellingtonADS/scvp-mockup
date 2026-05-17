@@ -30,12 +30,10 @@ export function FeatureHero({
           <div className="pointer-events-none absolute -bottom-12 left-12 h-24 w-44 rounded-full bg-[#00F0FF]/12 blur-2xl" />
 
           <div className="relative z-10 flex flex-col justify-end gap-3 sm:min-h-52 lg:min-h-56">
-            <Badge className="w-fit border border-amber-300/35 bg-amber-500/18 text-[11px] font-bold uppercase tracking-[0.14em] text-amber-300">
+            <Badge className="w-fit min-h-7 border border-amber-300/35 bg-amber-500/18 px-3 py-1 text-[11px] leading-[1.2] font-bold uppercase tracking-widest text-amber-300">
               {badge}
             </Badge>
-            <h1 className={`${titleClassName} scvp-title-page`}>
-              {title}
-            </h1>
+            <h1 className={`${titleClassName} scvp-title-page`}>{title}</h1>
             <div className="flex items-center gap-2.5">
               <span className="h-px w-16 bg-[linear-gradient(90deg,rgba(0,240,255,0.9),rgba(0,240,255,0.16))] sm:w-24" />
               <span className="h-2 w-2 rounded-full bg-[#00F0FF] shadow-[0_0_12px_rgba(0,240,255,0.68)]" />
