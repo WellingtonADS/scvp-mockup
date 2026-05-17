@@ -188,7 +188,10 @@ export function HomeView({
             >
               <div className="relative h-72 w-full bg-[radial-gradient(circle_at_50%_8%,rgba(255,255,255,0.08),transparent_42%),linear-gradient(180deg,rgba(10,26,38,0.9),rgba(6,18,28,0.96))]">
                 <Image
-                  src={testimonialPhotoById[testimonial.id] ?? "/assets/producao/alunos/01 SEDUC.jpg"}
+                  src={
+                    testimonialPhotoById[testimonial.id] ??
+                    "/assets/producao/alunos/01 SEDUC.jpg"
+                  }
                   alt={`Foto de ${testimonial.name}`}
                   fill
                   sizes="(max-width: 768px) 100vw, 33vw"
