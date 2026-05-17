@@ -29,7 +29,7 @@ export function MaterialCard({ material }: MaterialCardProps) {
   const thumbImage = pickImageByEntityId(material.id, materialThumbImages);
 
   return (
-    <Card className="group relative gap-0 overflow-hidden rounded-[10px] border border-white/14 bg-[#123B4A]/64 p-4 shadow-[0_10px_26px_rgba(1,8,14,0.38)] transition-all duration-300 hover:-translate-y-1 hover:border-[#00F0FF] hover:shadow-[0_0_30px_rgba(0,240,255,0.22)]">
+    <Card className="surface-elevated group relative gap-0 overflow-hidden rounded-[10px] p-4 transition-all duration-300 hover:-translate-y-1 hover:border-[#00F0FF] hover:shadow-[0_0_30px_rgba(0,240,255,0.22)]">
       <div className="absolute inset-x-0 top-0 h-1 bg-linear-to-r from-transparent via-[#00F0FF]/70 to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
       <div className="flex items-center justify-between gap-2">
         <Badge className="border border-[#00F0FF]/35 bg-[#00F0FF]/10 text-[10px] font-bold uppercase tracking-widest text-[#00F0FF]">
@@ -49,7 +49,7 @@ export function MaterialCard({ material }: MaterialCardProps) {
         />
         <div className="pointer-events-none absolute inset-0 bg-linear-to-t from-[#00151D]/75 via-transparent to-transparent" />
       </div>
-      <h3 className="mt-2 line-clamp-2 font-heading text-lg font-extrabold uppercase leading-tight text-white">
+      <h3 className="scvp-title-card mt-2 line-clamp-2 text-lg">
         {material.title}
       </h3>
       <div className="mt-2 flex flex-wrap items-center gap-2 text-[11px] text-slate-300">

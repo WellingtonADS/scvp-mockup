@@ -45,7 +45,7 @@ export function AlertCard({ alert }: AlertCardProps) {
   const thumbImage = pickImageByEntityId(alert.id, alertThumbImages);
 
   return (
-    <Card className="group relative gap-0 overflow-hidden rounded-[10px] border border-white/14 bg-[#123B4A]/64 p-3 shadow-[0_10px_26px_rgba(1,8,14,0.38)] transition-all duration-300 hover:-translate-y-0.5 hover:border-[#00F0FF] hover:shadow-[0_0_26px_rgba(0,240,255,0.18)]">
+    <Card className="surface-elevated group relative gap-0 overflow-hidden rounded-[10px] p-3 transition-all duration-300 hover:-translate-y-0.5 hover:border-[#00F0FF] hover:shadow-[0_0_26px_rgba(0,240,255,0.18)]">
       <div className="absolute inset-x-0 top-0 h-1 bg-linear-to-r from-transparent via-[#00F0FF]/70 to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
       <div className="flex items-center justify-between gap-2">
         <Badge
@@ -67,10 +67,10 @@ export function AlertCard({ alert }: AlertCardProps) {
         />
         <div className="pointer-events-none absolute inset-0 bg-linear-to-t from-[#00151D]/75 via-transparent to-transparent" />
       </div>
-      <p className="mt-2 text-[10px] font-semibold uppercase tracking-[0.14em] text-slate-300">
+      <p className="scvp-meta mt-2">
         {alert.career} • {alert.banca}
       </p>
-      <h3 className="mt-1.5 line-clamp-2 min-h-10 font-heading text-base font-extrabold uppercase leading-tight text-white">
+      <h3 className="scvp-title-card mt-1.5 line-clamp-2 min-h-10">
         {alert.orgao}
       </h3>
       <div className="mt-2 flex flex-wrap items-center gap-x-2 gap-y-1 text-[10px] text-slate-300">

@@ -33,9 +33,7 @@ export function FeatureHero({
             <Badge className="w-fit border border-amber-300/35 bg-amber-500/18 text-[11px] font-bold uppercase tracking-[0.14em] text-amber-300">
               {badge}
             </Badge>
-            <h1
-              className={`${titleClassName} font-heading text-3xl font-extrabold uppercase leading-[0.98] text-white sm:text-5xl`}
-            >
+            <h1 className={`${titleClassName} scvp-title-page`}>
               {title}
             </h1>
             <div className="flex items-center gap-2.5">

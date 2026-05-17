@@ -1,8 +1,17 @@
 import { HomeView } from "@/components/views/home-view";
-import { getHomePageData } from "@/core/services";
+import { getCourses, getHomePageData } from "@/core/services";
 
 export default async function Home() {
-  const { featuredCourses, quickTips } = await getHomePageData();
+  const { featuredCourses, quickTips, testimonials } = await getHomePageData();
+  const allCourses = await getCourses();
+  const bestSellingCourses = allCourses.slice(6, 14);
 
-  return <HomeView featuredCourses={featuredCourses} quickTips={quickTips} />;
+  return (
+    <HomeView
+      featuredCourses={featuredCourses}
+      bestSellingCourses={bestSellingCourses}
+      quickTips={quickTips}
+      testimonials={testimonials}
+    />
+  );
 }

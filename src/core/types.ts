@@ -54,6 +54,28 @@ export type Testimonial = {
   text: string;
 };
 
+export type BlogPost = {
+  id: string;
+  title: string;
+  date: string;
+  href: string;
+  image: string;
+  category: string;
+};
+
+export type InstitutionalInfo = {
+  yearsOfAuthority: string;
+  cnpj: string;
+  address: string;
+  cityState: string;
+  phones: string;
+  whatsappUrl: string;
+  email: string;
+  faqHref: string;
+  contactHref: string;
+  studentAreaHref: string;
+};
+
 export type CourseFilters = {
   career?: string;
   organ?: string;

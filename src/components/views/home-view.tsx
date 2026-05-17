@@ -1,397 +1,218 @@
 "use client";
 
-import { Check, CirclePlay, Play, X } from "lucide-react";
+import { Sparkles } from "lucide-react";
 import Image from "next/image";
-import { useEffect, useMemo, useState } from "react";
+import Link from "next/link";
+import { useMemo } from "react";
 
+import { PageShell, StickyMobileCta } from "@/components/layout/page-shell";
 import { Button } from "@/components/ui/button";
-import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogHeader,
-  DialogTitle,
-} from "@/components/ui/dialog";
-import {
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from "@/components/ui/table";
-import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import {
-  ConversionPage,
-  type ConversionPageConfig,
-} from "@/components/views/shared/conversion-page";
 import { CourseCard } from "@/components/views/shared/course-card";
-import type { Course } from "@/core/types";
-
-type Story = {
-  id: string;
-  label: string;
-  caption: string;
-  videoUrl: string;
-};
+import { ServiceRequestDialog } from "@/components/views/shared/service-request-dialog";
+import type { Course, Testimonial } from "@/core/types";
 
 type HomeViewProps = {
   featuredCourses: Course[];
-  quickTips: string[];
+  bestSellingCourses: Course[];
+  testimonials: Testimonial[];
 };
 
-const homePageConfig = {
-  hero: {
-    badge: "Metodologia 80/20",
-    title: "Comece sua jornada para a aprovação",
-    titleClassName: "max-w-[16ch]",
-    description:
-      "Aceleradora de aprovação com tecnologia IA e mentorias de elite para acelerar decisões e execução.",
-    primaryLead: {
-      triggerText: "Quero ser aprovado",
-      title: "Comece pela rota certa",
-      description:
-        "Informe seus dados para receber uma orientação inicial alinhada ao seu edital e momento de preparação.",
-    },
-    secondaryHref: "#cursos",
-    secondaryLabel: "Ver catálogo",
-  },
-  stickyCta: {
-    title: "Planner estratégico",
-    subtitle: "Receba a rota inicial de estudos no celular",
-    lead: {
-      triggerText: "Quero começar",
-      title: "Receba sua rota inicial",
-      description:
-        "Informe seus dados para liberar o planner estratégico e uma indicação de próximos passos.",
-    },
-  },
-} satisfies ConversionPageConfig;
-
-const socialProofTiles = [
+const approvalMetrics = [
   {
-    image: "/assets/producao/alunos/aluno-01.png",
-    title: "Resultados reais",
-    subtitle: "Aprovados com metodo e acompanhamento",
+    value: "+16 Anos",
+    label: "Lideranca preparatoria no Norte",
   },
   {
-    image: "/assets/producao/posts/post-01.png",
-    title: "Rotina orientada",
-    subtitle: "Conteudo objetivo para execução semanal",
+    value: "+5.200 Aprovados",
+    label: "Transformados em servidores publicos",
   },
   {
-    image: "/assets/producao/alunos/aluno-02.png",
-    title: "Comunidade ativa",
-    subtitle: "Rede de apoio para manter constancia",
+    value: "100% Hibrido",
+    label: "Conteudo pos-edital em tempo recorde",
   },
 ];
 
-export function HomeView({ featuredCourses, quickTips }: HomeViewProps) {
-  const [activeTab, setActiveTab] = useState("TODOS");
-  const [coursesLoading, setCoursesLoading] = useState(true);
-  const [selectedStory, setSelectedStory] = useState<Story | null>(null);
-  const [leadSubmitted, setLeadSubmitted] = useState(false);
+const testimonialPhotoById: Record<string, string> = {
+  t1: "/assets/producao/alunos/01 SEDUC.jpg",
+  t2: "/assets/producao/alunos/02 .jpg",
+  t3: "/assets/producao/alunos/03 TJAM.jpg",
+};
 
-  useEffect(() => {
-    const timer = setTimeout(() => setCoursesLoading(false), 850);
-    return () => clearTimeout(timer);
-  }, []);
-
-  const stories: Story[] = useMemo(
-    () =>
-      quickTips.slice(0, 4).map((tip, index) => ({
-        id: `story-${index}`,
-        label: tip,
-        caption:
-          index === 0
-            ? "Dica de Penal • Art. 121"
-            : index === 1
-              ? "Saiba mais sobre o Edital"
-              : index === 2
-                ? "Ciclos de revisão"
-                : "História de sucesso",
-        videoUrl: "https://www.youtube.com/embed/6xKWiCMKKJg",
-      })),
-    [quickTips],
+export function HomeView({
+  featuredCourses,
+  bestSellingCourses,
+  testimonials,
+}: HomeViewProps) {
+  const coursePool = useMemo(
+    () => [...featuredCourses, ...bestSellingCourses],
+    [featuredCourses, bestSellingCourses],
   );
 
-  const filteredCourses = useMemo(() => {
-    if (activeTab === "TODOS") return featuredCourses;
-    if (activeTab === "MENTORIAS") {
-      return featuredCourses.filter((course) => course.mode === "Mentoria");
-    }
-    if (activeTab === "PRESENCIAL") {
-      return featuredCourses.filter((course) => course.mode === "Presencial");
-    }
-    if (activeTab === "ONLINE") {
-      return featuredCourses.filter((course) => course.mode === "Online");
-    }
-    return featuredCourses;
-  }, [activeTab, featuredCourses]);
+  const displayedCourses = coursePool.slice(0, 3);
+
+  const highlightedTestimonials = useMemo(
+    () => testimonials.slice(0, 3),
+    [testimonials],
+  );
 
   return (
-    <>
-      <ConversionPage
-        hero={homePageConfig.hero}
-        stickyCta={homePageConfig.stickyCta}
-      >
-        <section id="cursos" className="section-shell py-7 sm:py-9">
-          <Tabs
-            value={activeTab}
-            onValueChange={setActiveTab}
-            className="gap-4"
-          >
-            <TabsList
-              variant="line"
-              className="mx-auto flex w-full flex-wrap justify-center gap-2 rounded-none p-0"
-            >
-              {[
-                ["TODOS", "TODOS"],
-                ["PRESENCIAL", "PRESENCIAL"],
-                ["ONLINE", "ONLINE"],
-                ["MENTORIAS", "MENTORIAS"],
-              ].map(([value, label]) => (
-                <TabsTrigger
-                  key={value}
-                  value={value}
-                  className="rounded-full border border-white/15 px-4 py-1.5 text-[10px] font-black uppercase tracking-[0.17em] transition-all hover:bg-white/6 hover:text-slate-100 data-[state=active]:border-[#00F0FF]/70 data-[state=active]:bg-[#00F0FF]/14 data-[state=active]:text-[#00F0FF] data-[state=active]:hover:bg-[#00F0FF]/20 data-[state=active]:hover:text-[#00F0FF]"
-                >
-                  {label}
-                </TabsTrigger>
-              ))}
-            </TabsList>
-          </Tabs>
+    <PageShell
+      showInstitutionalTrustStrip={false}
+      stickyCta={
+        <StickyMobileCta
+          title="Planner estrategico"
+          subtitle="Receba sua rota de estudos no celular"
+        >
+          <ServiceRequestDialog
+            triggerText="Quero"
+            triggerSize="sm"
+            triggerClassName="h-9 px-4 text-[11px]"
+            title="Receba sua rota inicial"
+            description="Preencha os dados para liberar o planner estrategico com prioridades da sua area."
+          />
+        </StickyMobileCta>
+      }
+    >
+      <section className="relative overflow-hidden bg-[#041D29]">
+        <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(118deg,rgba(2,6,23,0.94)_0%,rgba(2,6,23,0.75)_48%,rgba(0,34,47,0.42)_100%)]" />
+        <div className="pointer-events-none absolute inset-0 opacity-30 [background:repeating-linear-gradient(90deg,rgba(92,112,126,0.2)_0px,rgba(92,112,126,0.2)_1px,transparent_1px,transparent_150px)]" />
+        <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_78%_28%,rgba(0,240,255,0.22),transparent_38%)]" />
+        <div className="relative">
+          <article className="relative overflow-hidden">
+            <div className="relative z-10 grid items-center gap-6 px-4 pt-5 pb-0 sm:px-6 sm:pt-7 sm:pb-0 lg:grid-cols-[1.1fr_0.9fr]">
+              <div>
+                <p className="inline-flex w-fit items-center gap-2 rounded-full border border-[#00F0FF]/30 bg-[#00F0FF]/12 px-3 py-1 text-[10px] font-black uppercase tracking-[0.16em] text-[#8FFAFF]">
+                  <Sparkles className="size-3" />
+                  Aceleradora de aprovacao
+                </p>
+                <h1 className="mt-4 max-w-[12ch] font-heading text-4xl font-black uppercase leading-[0.92] text-white sm:text-5xl lg:text-6xl">
+                  Sua aprovacao nao e sorte. E engenharia.
+                </h1>
+                <p className="mt-4 max-w-xl text-base text-slate-200 sm:text-xl">
+                  Domine os concursos mais disputados com o Metodo 80/20 e
+                  Inteligencia do Norte.
+                </p>
 
-          <div className="mt-5 grid gap-3 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-            {coursesLoading
-              ? Array.from({ length: 6 }).map((_, index) => (
-                  <article
-                    key={`skeleton-${index}`}
-                    className="animate-pulse rounded-[10px] border border-white/14 bg-[#123B4A]/62 p-4 shadow-[0_10px_26px_rgba(1,8,14,0.38)]"
-                    aria-hidden="true"
+                <div className="mt-6 flex flex-wrap items-center gap-3">
+                  <ServiceRequestDialog
+                    triggerText="Quero ser aprovado"
+                    triggerClassName="h-12 rounded-[10px] px-7 text-[13px] tracking-[0.12em]"
+                    title="Comece pela rota certa"
+                    description="Informe seus dados para receber uma orientacao inicial alinhada ao seu edital e ao seu momento de preparacao."
+                  />
+                  <Button
+                    asChild
+                    size="lg"
+                    variant="outline"
+                    className="h-12 rounded-[10px] border-white/20 bg-white/5 px-7 text-[12px] font-black uppercase tracking-[0.12em] text-slate-100 hover:border-[#00F0FF]/50 hover:bg-[#00F0FF]/10 hover:text-slate-100"
                   >
-                    <div className="h-5 w-24 rounded-md bg-white/20" />
-                    <div className="mt-3 h-3 w-40 rounded bg-white/20" />
-                    <div className="mt-3 h-6 w-52 rounded bg-white/20" />
-                    <div className="mt-3 h-3 w-full rounded bg-white/20" />
-                    <div className="mt-2 h-3 w-4/5 rounded bg-white/20" />
-                    <div className="mt-4 h-7 w-28 rounded bg-white/20" />
-                    <div className="mt-3 grid grid-cols-2 gap-2">
-                      <div className="h-9 rounded bg-white/20" />
-                      <div className="h-9 rounded bg-white/20" />
-                    </div>
-                  </article>
-                ))
-              : filteredCourses
-                  .slice(0, 6)
-                  .map((course) => (
-                    <CourseCard key={course.id} course={course} />
-                  ))}
-          </div>
-        </section>
+                    <Link href="/cursos#catalogo">Ver cursos</Link>
+                  </Button>
+                </div>
+              </div>
 
-        <section id="dicas" className="section-shell py-7 sm:py-8">
-          <div className="rounded-[10px] border border-white/14 bg-[#123B4A]/62 p-4 shadow-[0_10px_26px_rgba(1,8,14,0.38)] sm:p-5">
-            <h2 className="font-heading text-xl font-extrabold uppercase tracking-tight text-slate-50">
-              Dicas rápidas de quem passou
-            </h2>
-            <div className="mt-4 grid grid-cols-2 gap-3 sm:grid-cols-4">
-              {stories.map((story) => (
-                <button
-                  key={story.id}
-                  type="button"
-                  onClick={() => setSelectedStory(story)}
-                  className="group space-y-2 text-center"
+              <figure className="relative mx-auto flex w-full items-end justify-center lg:justify-end">
+                <div className="relative size-72 sm:size-80 lg:size-88">
+                  <div className="pointer-events-none absolute inset-0 rounded-full border border-[#00F0FF]/16 bg-[radial-gradient(circle_at_30%_20%,rgba(255,255,255,0.1),transparent_45%),linear-gradient(160deg,rgba(0,240,255,0.08),rgba(2,6,23,0.28))] shadow-[0_10px_24px_rgba(0,0,0,0.28)]" />
+                  <div className="absolute inset-px overflow-hidden rounded-full border border-white/6 bg-[#041D29]">
+                    <Image
+                      src="/assets/producao/institucional/dono.png"
+                      alt="Professor Fabio Silva"
+                      fill
+                      priority
+                      sizes="(max-width: 640px) 280px, (max-width: 1024px) 320px, 360px"
+                      className="object-cover object-top"
+                    />
+                  </div>
+                </div>
+              </figure>
+            </div>
+          </article>
+        </div>
+        <div className="relative z-10 h-px w-full bg-[linear-gradient(90deg,transparent_0%,transparent_40%,rgba(0,240,255,0.16)_72%,rgba(0,240,255,0.45)_100%)]" />
+        <div className="relative pb-0">
+          <div className="section-shell">
+            <div className="grid sm:grid-cols-3">
+              {approvalMetrics.map((metric) => (
+                <article
+                  key={metric.value}
+                  className="flex min-h-28 flex-col justify-center p-4 sm:min-h-30 sm:p-5"
                 >
-                  <span className="mx-auto flex size-16 items-center justify-center rounded-full border border-[#00F0FF] p-0.5 transition-transform duration-300 group-hover:scale-105">
-                    <span className="relative flex size-full items-center justify-center rounded-full border border-[#00F0FF]/65 bg-[#001A22] text-[#00F0FF] shadow-[0_0_16px_rgba(0,240,255,0.32)]">
-                      <span className="absolute inset-1 rounded-full border border-[#00F0FF]/30" />
-                      <Play className="size-5" />
-                    </span>
-                  </span>
-                  <p className="text-[10px] font-bold uppercase tracking-[0.16em] text-slate-200">
-                    {story.label}
+                  <p className="font-heading text-4xl font-black leading-none text-white">
+                    {metric.value}
                   </p>
-                  <p className="text-[10px] text-slate-400">{story.caption}</p>
-                </button>
+                  <p className="mt-2 max-w-[24ch] text-sm text-slate-300">
+                    {metric.label}
+                  </p>
+                </article>
               ))}
             </div>
           </div>
-        </section>
+        </div>
+      </section>
 
-        <section className="section-shell py-1 sm:py-2">
-          <div className="grid gap-3 sm:grid-cols-3">
-            {socialProofTiles.map((tile) => (
-              <article
-                key={tile.title}
-                className="group relative overflow-hidden rounded-[10px] border border-white/14 bg-[#123B4A]/62 shadow-[0_10px_26px_rgba(1,8,14,0.38)]"
-              >
-                <div className="relative aspect-video">
-                  <Image
-                    src={tile.image}
-                    alt={tile.title}
-                    fill
-                    className="object-cover transition-transform duration-500 group-hover:scale-[1.03]"
-                    sizes="(max-width: 768px) 100vw, 420px"
-                  />
-                  <div className="absolute inset-0 bg-linear-to-t from-[#00141D]/85 via-[#00141D]/35 to-transparent" />
-                  <div className="absolute inset-x-0 bottom-0 p-3">
-                    <p className="text-[10px] font-black uppercase tracking-[0.16em] text-[#00F0FF]">
-                      SCVP
-                    </p>
-                    <h3 className="mt-1 font-heading text-base font-extrabold uppercase leading-tight text-white">
-                      {tile.title}
-                    </h3>
-                    <p className="mt-1 text-xs text-slate-300">
-                      {tile.subtitle}
-                    </p>
-                  </div>
-                </div>
-              </article>
-            ))}
+      <section id="cursos" className="section-shell relative py-7 sm:py-9">
+        <div className="pointer-events-none absolute inset-x-0 top-0 h-24 bg-[radial-gradient(ellipse_at_top,rgba(0,240,255,0.14),transparent_72%)]" />
+        <div className="mb-4">
+          <div>
+            <h2 className="font-heading text-3xl font-black leading-[0.95] text-white sm:text-4xl">
+              Os Melhores do Mercado:
+              <br />
+              Comece Agora
+            </h2>
           </div>
-        </section>
+        </div>
 
-        <section className="section-shell py-4 sm:py-6">
-          <div className="grid items-stretch gap-4 lg:grid-cols-[0.95fr_1.05fr]">
-            <section id="planner" className="h-full">
-              <div className="h-full rounded-[12px] border border-white/14 bg-[#123B4A]/62 p-4 shadow-[0_10px_26px_rgba(1,8,14,0.38)] sm:p-5">
-                <div className="min-h-20">
-                  <h3 className="font-heading text-lg font-extrabold uppercase text-slate-50">
-                    Pronto para passar?
-                  </h3>
-                  <p className="mt-2 text-sm text-slate-300">
-                    Baixe seu planner de estudos gratuito e receba no seu
-                    e-mail.
+        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+          {displayedCourses.map((course) => (
+            <CourseCard key={course.id} course={course} />
+          ))}
+        </div>
+      </section>
+
+      <section className="section-shell py-7 sm:py-9">
+        <div className="mb-4 flex flex-wrap items-end justify-between gap-3">
+          <div>
+            <p className="scvp-meta-strong">Prova social</p>
+            <h2 className="scvp-title-section mt-1">
+              Aprovados e confianca de marca
+            </h2>
+          </div>
+        </div>
+
+        <div className="mt-3 grid gap-3 md:grid-cols-2 xl:grid-cols-3">
+          {highlightedTestimonials.map((testimonial) => (
+            <article
+              key={testimonial.id}
+              className="surface-elevated overflow-hidden rounded-[12px] p-0"
+            >
+              <div className="relative h-72 w-full bg-[radial-gradient(circle_at_50%_8%,rgba(255,255,255,0.08),transparent_42%),linear-gradient(180deg,rgba(10,26,38,0.9),rgba(6,18,28,0.96))]">
+                <Image
+                  src={testimonialPhotoById[testimonial.id] ?? "/assets/producao/alunos/01 SEDUC.jpg"}
+                  alt={`Foto de ${testimonial.name}`}
+                  fill
+                  sizes="(max-width: 768px) 100vw, 33vw"
+                  className="object-contain object-bottom"
+                />
+                <div className="pointer-events-none absolute inset-x-0 bottom-0 h-20 bg-linear-to-t from-[#020617]/40 to-transparent" />
+              </div>
+              <div className="p-4">
+                <p className="text-sm leading-6 text-slate-200">
+                  &ldquo;{testimonial.text}&rdquo;
+                </p>
+                <div className="mt-3 border-t border-white/10 pt-3">
+                  <p className="text-sm font-black text-slate-100">
+                    {testimonial.name}
+                  </p>
+                  <p className="text-xs uppercase tracking-[0.13em] text-[#00F0FF]">
+                    {testimonial.role}
                   </p>
                 </div>
-
-                {leadSubmitted ? (
-                  <div className="mt-3 rounded-xl border border-[#00F0FF]/30 bg-[#00F0FF]/10 p-4 text-sm text-slate-100">
-                    Sucesso! Verifique seu e-mail para acessar o planner.
-                  </div>
-                ) : (
-                  <form
-                    className="mt-3 grid gap-2.5"
-                    onSubmit={(event) => {
-                      event.preventDefault();
-                      setLeadSubmitted(true);
-                    }}
-                  >
-                    <input
-                      required
-                      type="text"
-                      placeholder="Nome"
-                      className="h-11 rounded-md border border-white/20 bg-[#00212A] px-3 text-sm text-slate-100 outline-none placeholder:text-slate-400 focus:border-[#00F0FF]"
-                    />
-                    <input
-                      required
-                      type="email"
-                      placeholder="E-mail"
-                      className="h-11 rounded-md border border-white/20 bg-[#00212A] px-3 text-sm text-slate-100 outline-none placeholder:text-slate-400 focus:border-[#00F0FF]"
-                    />
-                    <Button
-                      type="submit"
-                      className="cta-cyan h-11 font-bold uppercase"
-                    >
-                      Baixar gratuitamente
-                    </Button>
-                  </form>
-                )}
               </div>
-            </section>
-
-            <section id="matriz" className="h-full">
-              <div className="h-full rounded-[12px] border border-white/14 bg-[#123B4A]/62 p-4 shadow-[0_10px_26px_rgba(1,8,14,0.38)] sm:p-5">
-                <div className="mb-2 min-h-20">
-                  <h3 className="font-heading text-lg font-extrabold uppercase text-slate-50">
-                    Matriz de decisão
-                  </h3>
-                  <p className="mt-2 text-sm text-slate-300">
-                    Comparativo rápido para escolher o formato ideal.
-                  </p>
-                </div>
-                <Table className="table-fixed text-slate-100">
-                  <TableHeader>
-                    <TableRow>
-                      <TableHead className="w-[48%] px-2 py-1.5 text-[10px]">
-                        Formato
-                      </TableHead>
-                      <TableHead className="w-[26%] px-2 py-1.5 text-[10px]">
-                        Online
-                      </TableHead>
-                      <TableHead className="w-[26%] bg-[#00F0FF]/8 px-2 py-1.5 text-[10px] text-[#00F0FF]">
-                        Curso Presencial
-                      </TableHead>
-                    </TableRow>
-                  </TableHeader>
-                  <TableBody>
-                    {[
-                      ["Curso Online", true, false],
-                      ["Curso Presencial", false, true],
-                      ["Curso de Bolso", true, false],
-                      ["Alertas Mentor", true, true],
-                      ["Acelerador 80/20", true, true],
-                      ["Mentoria Elite", true, true],
-                    ].map(([label, online, presencial]) => (
-                      <TableRow key={String(label)}>
-                        <TableCell className="px-2 py-1.5 text-xs">
-                          {String(label)}
-                        </TableCell>
-                        <TableCell className="px-2 py-1.5 text-xs">
-                          {online ? (
-                            <Check className="size-4 text-[#00F0FF]" />
-                          ) : (
-                            <X className="size-4 text-slate-300" />
-                          )}
-                        </TableCell>
-                        <TableCell className="bg-[#00F0FF]/6 px-2 py-1.5 text-xs">
-                          {presencial ? (
-                            <Check className="size-4 text-[#00F0FF]" />
-                          ) : (
-                            <X className="size-4 text-slate-300" />
-                          )}
-                        </TableCell>
-                      </TableRow>
-                    ))}
-                  </TableBody>
-                </Table>
-              </div>
-            </section>
-          </div>
-        </section>
-      </ConversionPage>
-
-      <Dialog
-        open={Boolean(selectedStory)}
-        onOpenChange={(open) => !open && setSelectedStory(null)}
-      >
-        <DialogContent className="max-w-3xl border-white/15 bg-[#031824] p-0 text-slate-100">
-          <DialogHeader className="p-4 pb-2">
-            <DialogTitle className="font-heading text-left text-lg font-extrabold uppercase text-white">
-              {selectedStory?.label}
-            </DialogTitle>
-            <DialogDescription className="text-left text-slate-400">
-              {selectedStory?.caption}
-            </DialogDescription>
-          </DialogHeader>
-          <div className="aspect-video w-full overflow-hidden rounded-b-[12px] border-t border-white/10 bg-black">
-            {selectedStory ? (
-              <iframe
-                title={`Vídeo ${selectedStory.label}`}
-                src={selectedStory.videoUrl}
-                className="h-full w-full"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                allowFullScreen
-              />
-            ) : (
-              <div className="flex h-full items-center justify-center text-slate-400">
-                <CirclePlay className="size-10" />
-              </div>
-            )}
-          </div>
-        </DialogContent>
-      </Dialog>
-    </>
+            </article>
+          ))}
+        </div>
+      </section>
+    </PageShell>
   );
 }

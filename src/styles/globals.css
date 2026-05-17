@@ -52,6 +52,14 @@
   :root {
     --scvp-primary: #002d37;
     --scvp-accent: #00f0ff;
+    --scvp-bg-main: #020617;
+    --scvp-surface-authority: #0a2b38;
+    --scvp-surface-elevated: #123b4a;
+    --scvp-text-primary: #f8fafc;
+    --scvp-text-secondary: #cbd5e1;
+    --scvp-text-meta: #94a3b8;
+    --scvp-highlight-teal: #1db4be;
+    --scvp-highlight-gold: #f59e0b;
 
     /* --- FUNDAMENTOS DA MARCA (MODO ESCURO POR PADRAO) --- */
     /* Dark Navy #020617 */
@@ -124,6 +132,14 @@
     @apply bg-[#00F0FF] text-[#001A22] transition-all duration-300 hover:bg-[#58F7FF] hover:text-[#001319] hover:shadow-[0_0_24px_rgba(0,240,255,0.55)] focus-visible:ring-2 focus-visible:ring-[#7AF9FF]/70 focus-visible:ring-offset-2 focus-visible:ring-offset-[#020617] active:scale-[0.99];
   }
 
+  .surface-authority {
+    @apply border border-white/14 bg-[#0A2B38]/72 shadow-[0_10px_26px_rgba(1,8,14,0.38)];
+  }
+
+  .surface-elevated {
+    @apply border border-white/14 bg-[#123B4A]/64 shadow-[0_10px_26px_rgba(1,8,14,0.38)];
+  }
+
   .glass-card {
     @apply bg-[#002D37]/40 backdrop-blur-md border border-white/10 shadow-2xl;
   }
@@ -152,6 +168,26 @@
 
   .section-title {
     @apply text-3xl font-black uppercase tracking-tight text-slate-50 sm:text-5xl;
+  }
+
+  .scvp-title-page {
+    @apply font-heading text-3xl font-extrabold uppercase leading-[0.98] text-white sm:text-5xl;
+  }
+
+  .scvp-title-section {
+    @apply font-heading text-2xl font-extrabold uppercase tracking-tight text-slate-50 sm:text-3xl;
+  }
+
+  .scvp-title-card {
+    @apply font-heading text-base font-extrabold uppercase leading-tight text-white;
+  }
+
+  .scvp-meta {
+    @apply text-[10px] font-semibold uppercase tracking-[0.14em] text-slate-300;
+  }
+
+  .scvp-meta-strong {
+    @apply text-[10px] font-black uppercase tracking-[0.16em] text-[#00F0FF];
   }
 
   .mesh-surface {

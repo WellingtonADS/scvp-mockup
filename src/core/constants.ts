@@ -394,20 +394,39 @@ export const quickTips = [
 export const testimonials: Testimonial[] = [
   {
     id: "t1",
-    name: "Carlos A.",
-    role: "Aprovado PF",
-    text: "A metodologia SCVP trouxe foco no que realmente deslocava minha nota e tirou meu estudo da aleatoriedade.",
+    name: "Alex Alves Bueno",
+    role: "1º Lugar - SEDUC-AM",
+    text: "Meu conselho e foco, dedicacao e ficar ao lado de pessoas que realmente te ajudam no processo.",
   },
   {
     id: "t2",
-    name: "Rafael T.",
-    role: "Aprovado TJ-CE",
-    text: "Planejamento estratégico, cobrança certa e clareza semanal. Foi a primeira vez que senti direção real.",
+    name: "Victor Motta",
+    role: "Aprovado em 4 concursos de Delegado",
+    text: "Escolhi Delegado da PF e encontrei no SCVP uma equipe comprometida com estrategia, constancia e execucao.",
   },
   {
     id: "t3",
-    name: "Mariana G.",
-    role: "Aprovada CGU",
-    text: "Consegui transformar rotina em performance porque cada bloco do curso entregava prioridade e contexto de prova.",
+    name: "Paulo Henrique Pereira",
+    role: "Aprovado - TJ-AM",
+    text: "Quando voce tenta com direcao, a aprovacao deixa de ser sorte e passa a ser projeto.",
+  },
+  {
+    id: "t4",
+    name: "Dara Fumi Oda",
+    role: "Aprovada - Policia Federal",
+    text: "Depois que a rotina de estudos encaixa com metodo, voce ganha consistencia e resultado.",
   },
 ];
+
+export const institutionalInfo = {
+  yearsOfAuthority: "16 anos de autoridade em concursos",
+  cnpj: "21.894.883/0001-09",
+  address: "Rua Major. Gabriel, no 1771",
+  cityState: "Centro, Manaus / AM",
+  phones: "(92) 3190-2989 / (92) 9 8458-5786",
+  whatsappUrl: "https://wa.me/5592984585786",
+  email: "contato@souconcurseiroevoupassar.com",
+  faqHref: "https://souconcurseiroevoupassar.com/default/faq",
+  contactHref: "https://souconcurseiroevoupassar.com/default/atendimento",
+  studentAreaHref: "/cursos",
+};

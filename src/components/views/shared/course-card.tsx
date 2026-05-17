@@ -32,7 +32,7 @@ export function CourseCard({ course }: CourseCardProps) {
   const coverImage = pickImageByEntityId(course.id, courseCoverImages);
 
   return (
-    <Card className="group relative mx-auto w-full max-w-88 gap-0 overflow-hidden rounded-[10px] border border-white/14 bg-[#123B4A]/64 p-2.5 shadow-[0_10px_26px_rgba(1,8,14,0.38)] transition-all duration-300 hover:-translate-y-0.5 hover:border-[#00F0FF] hover:shadow-[0_0_26px_rgba(0,240,255,0.18)] sm:p-3">
+    <Card className="surface-elevated group relative mx-auto w-full max-w-88 gap-0 overflow-hidden rounded-[10px] p-2.5 transition-all duration-300 hover:-translate-y-0.5 hover:border-[#00F0FF] hover:shadow-[0_0_26px_rgba(0,240,255,0.18)] sm:p-3">
       <div className="absolute inset-x-0 top-0 h-1 bg-linear-to-r from-transparent via-[#00F0FF]/70 to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
       <div className="flex items-center justify-between gap-2">
         <Badge className="border border-[#00F0FF]/35 bg-[#00F0FF]/10 text-[10px] font-bold uppercase tracking-widest text-[#00F0FF]">
@@ -56,10 +56,10 @@ export function CourseCard({ course }: CourseCardProps) {
         <div className="pointer-events-none absolute inset-0 bg-linear-to-t from-[#00151D]/70 via-transparent to-transparent" />
       </div>
 
-      <p className="mt-2 text-[10px] font-semibold uppercase tracking-[0.14em] text-slate-300">
+      <p className="scvp-meta mt-2">
         {course.career} • {course.organ}
       </p>
-      <h3 className="mt-1 line-clamp-2 min-h-8 font-heading text-[15px] font-extrabold uppercase leading-tight text-white sm:text-base">
+      <h3 className="scvp-title-card mt-1 line-clamp-2 min-h-8 text-[15px] sm:text-base">
         {course.title}
       </h3>
       <div className="mt-2 flex flex-wrap items-center gap-x-2 gap-y-1 text-[10px] text-slate-300">

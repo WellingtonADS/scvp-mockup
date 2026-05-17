@@ -1,3 +1,7 @@
+import Link from "next/link";
+
+import { institutionalInfo } from "@/core/constants";
+
 export function Footer() {
   return (
     <footer className="border-t border-white/10 bg-[#03161D]/90 px-4 py-10 text-sm text-slate-300 sm:px-6">
@@ -5,7 +9,7 @@ export function Footer() {
         <div className="space-y-3">
           <p className="text-lg font-black tracking-wide text-slate-50">SCVP</p>
           <p className="text-xs uppercase tracking-widest text-amber-400">
-            16 anos transformando concurseiros em aprovados
+            {institutionalInfo.yearsOfAuthority}
           </p>
           <p className="max-w-xl text-sm text-slate-400">
             Preparação estratégica para concursos com método 80/20, sede física
@@ -19,9 +23,15 @@ export function Footer() {
               Navegação
             </p>
             <div className="mt-3 space-y-2 text-sm text-slate-400">
-              <p>Home</p>
-              <p>Cursos</p>
-              <p>Alertas de editais</p>
+              <p>
+                <Link href="/">Home</Link>
+              </p>
+              <p>
+                <Link href="/cursos">Cursos</Link>
+              </p>
+              <p>
+                <Link href="/alertas">Alertas de editais</Link>
+              </p>
             </div>
           </div>
           <div>
@@ -29,9 +39,15 @@ export function Footer() {
               Base institucional
             </p>
             <div className="mt-3 space-y-2 text-sm text-slate-400">
-              <p>Manaus/AM</p>
-              <p>Sede própria</p>
-              <p>Metodologia 80/20</p>
+              <p>
+                <Link href={institutionalInfo.contactHref}>Contato</Link>
+              </p>
+              <p>
+                <Link href={institutionalInfo.faqHref}>Perguntas frequentes</Link>
+              </p>
+              <p>
+                <Link href={institutionalInfo.studentAreaHref}>Area do Aluno</Link>
+              </p>
             </div>
           </div>
         </div>
@@ -39,8 +55,12 @@ export function Footer() {
         <div className="lg:col-span-2">
           <div className="flex items-center justify-between gap-3 border-t border-white/10 pt-4 text-xs text-slate-400">
             <div className="space-y-1">
-              <p>CNPJ 57.515.556/0001-12</p>
-              <p>Rua Timbó, 136, Rosa Aurora, Manaus/AM</p>
+              <p>CNPJ {institutionalInfo.cnpj}</p>
+              <p>
+                {institutionalInfo.address}, {institutionalInfo.cityState}
+              </p>
+              <p>{institutionalInfo.phones}</p>
+              <p>{institutionalInfo.email}</p>
               <p>
                 © {new Date().getFullYear()} SCVP. Todos os direitos reservados.
               </p>
@@ -54,25 +74,11 @@ export function Footer() {
                 X
               </a>
               <a
-                href="#"
-                aria-label="Instagram"
+                href={institutionalInfo.whatsappUrl}
+                aria-label="WhatsApp"
                 className="rounded-full border border-white/15 px-2 py-1 text-[11px] font-semibold uppercase tracking-wide hover:border-[#00F0FF]/70 hover:text-[#00F0FF]"
               >
-                IG
-              </a>
-              <a
-                href="#"
-                aria-label="Facebook"
-                className="rounded-full border border-white/15 px-2 py-1 text-[11px] font-semibold uppercase tracking-wide hover:border-[#00F0FF]/70 hover:text-[#00F0FF]"
-              >
-                FB
-              </a>
-              <a
-                href="#"
-                aria-label="YouTube"
-                className="rounded-full border border-white/15 px-2 py-1 text-[11px] font-semibold uppercase tracking-wide hover:border-[#00F0FF]/70 hover:text-[#00F0FF]"
-              >
-                YT
+                WA
               </a>
             </div>
           </div>
