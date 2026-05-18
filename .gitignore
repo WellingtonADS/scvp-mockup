@@ -101,3 +101,6 @@ CLAUDE.md
 # Local operational artifacts (not required for deploy)
 tmp/
 build_output.txt
+playwright.config.ts
+package-lock.json
+package-lock.json

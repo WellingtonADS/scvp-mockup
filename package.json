@@ -7,6 +7,8 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
+    "test:e2e:visual": "playwright test --config=playwright.config.ts",
+    "test:e2e:visual:update": "playwright test --config=playwright.config.ts --update-snapshots",
     "images:extract": "powershell -ExecutionPolicy Bypass -File ./scripts/extract-production-images.ps1",
     "images:extract:download": "powershell -ExecutionPolicy Bypass -File ./scripts/extract-production-images.ps1 -DownloadOnly"
   },
@@ -23,6 +25,7 @@
     "vaul": "^1.1.2"
   },
   "devDependencies": {
+    "@playwright/test": "^1.60.0",
     "@tailwindcss/postcss": "^4",
     "@types/node": "^20",
     "@types/react": "^19",

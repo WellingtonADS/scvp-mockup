@@ -1,14 +1,12 @@
 "use client";
 
-import { Sparkles } from "lucide-react";
 import Image from "next/image";
-import Link from "next/link";
 import { useMemo } from "react";
 
 import { PageShell, StickyMobileCta } from "@/components/layout/page-shell";
-import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
 import { CourseCard } from "@/components/views/shared/course-card";
+import { FeatureHero } from "@/components/views/shared/feature-hero";
+import { SecondaryCtaLink } from "@/components/views/shared/secondary-cta-link";
 import { ServiceRequestDialog } from "@/components/views/shared/service-request-dialog";
 import type { Course, Testimonial } from "@/core/types";
 
@@ -75,77 +73,44 @@ export function HomeView({
         </StickyMobileCta>
       }
     >
-      <section className="relative overflow-hidden bg-[#041D29]">
-        <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(118deg,rgba(2,6,23,0.94)_0%,rgba(2,6,23,0.75)_48%,rgba(0,34,47,0.42)_100%)]" />
-        <div className="pointer-events-none absolute inset-0 opacity-30 [background:repeating-linear-gradient(90deg,rgba(92,112,126,0.2)_0px,rgba(92,112,126,0.2)_1px,transparent_1px,transparent_150px)]" />
-        <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_78%_28%,rgba(0,240,255,0.22),transparent_38%)]" />
-        <div className="relative">
-          <article className="relative overflow-hidden">
-            <div className="relative z-10 grid items-center gap-6 px-4 pt-5 sm:px-6 sm:pt-7 lg:grid-cols-[1.1fr_0.9fr]">
-              <div className="self-start">
-                <Badge className="w-fit min-h-7 border border-amber-300/35 bg-amber-500/18 px-3 py-1 text-[11px] leading-[1.2] font-bold uppercase tracking-widest text-amber-300">
-                  <Sparkles className="size-3" />
-                  Aceleradora de aprovacao
-                </Badge>
-                <h1 className="scvp-hero-title mt-4 max-w-[12ch] lg:flex lg:h-50 lg:max-w-xl lg:items-center">
-                  Sua aprovação é nossa meta.
-                </h1>
-                <p className="scvp-body-lg mt-4 max-w-xl">
-                  Domine os concursos mais disputados com o Metodo 80/20 e
-                  Inteligencia do Norte.
+      <FeatureHero
+        badge="Aceleradora de aprovacao"
+        title="Sua aprovação é nossa meta."
+        description="Domine os concursos mais disputados com o Metodo 80/20 e Inteligencia do Norte."
+        imageSrc="/fabio%20dono.png"
+        imageAlt="Professor Fabio Silva"
+        imagePriority
+        primaryAction={
+          <ServiceRequestDialog
+            triggerText="Quero ser aprovado"
+            triggerClassName="h-12 rounded-[10px] px-7 text-[13px] tracking-[0.12em]"
+            title="Comece pela rota certa"
+            description="Informe seus dados para receber uma orientacao inicial alinhada ao seu edital e ao seu momento de preparacao."
+          />
+        }
+        secondaryAction={
+          <SecondaryCtaLink href="/cursos#catalogo">
+            Ver cursos
+          </SecondaryCtaLink>
+        }
+      />
+
+      <section className="relative bg-[#041D29] pb-0">
+        <div className="section-shell">
+          <div className="grid sm:grid-cols-3">
+            {approvalMetrics.map((metric) => (
+              <article
+                key={metric.value}
+                className="flex min-h-24 flex-col justify-center p-4 sm:min-h-28 sm:p-5"
+              >
+                <p className="scvp-h2 leading-none text-white">
+                  {metric.value}
                 </p>
-
-                <div className="mt-6 flex flex-wrap items-end gap-3">
-                  <ServiceRequestDialog
-                    triggerText="Quero ser aprovado"
-                    triggerClassName="h-12 rounded-[10px] px-7 text-[13px] tracking-[0.12em]"
-                    title="Comece pela rota certa"
-                    description="Informe seus dados para receber uma orientacao inicial alinhada ao seu edital e ao seu momento de preparacao."
-                  />
-                  <Button
-                    asChild
-                    size="lg"
-                    variant="outline"
-                    className="h-12 rounded-[10px] border-white/20 bg-white/5 px-7 text-[12px] font-black uppercase tracking-[0.12em] text-slate-100 hover:border-[#00F0FF]/50 hover:bg-[#00F0FF]/10 hover:text-slate-100"
-                  >
-                    <Link href="/cursos#catalogo">Ver cursos</Link>
-                  </Button>
-                </div>
-              </div>
-
-              <figure className="relative mx-auto flex w-full items-end justify-center lg:justify-end">
-                <div className="relative h-80 w-full max-w-80 sm:h-96 sm:max-w-96 lg:h-108 lg:max-w-104">
-                  <Image
-                    src="/fabio%20dono.png"
-                    alt="Professor Fabio Silva"
-                    fill
-                    priority
-                    sizes="(max-width: 640px) 280px, (max-width: 1024px) 360px, 420px"
-                    className="object-contain object-bottom"
-                  />
-                </div>
-              </figure>
-            </div>
-          </article>
-        </div>
-        <div className="relative z-10 h-px w-full bg-[linear-gradient(90deg,transparent_0%,transparent_40%,rgba(0,240,255,0.16)_72%,rgba(0,240,255,0.45)_100%)]" />
-        <div className="relative pb-0">
-          <div className="section-shell">
-            <div className="grid sm:grid-cols-3">
-              {approvalMetrics.map((metric) => (
-                <article
-                  key={metric.value}
-                  className="flex min-h-24 flex-col justify-center p-4 sm:min-h-28 sm:p-5"
-                >
-                  <p className="scvp-h2 leading-none text-white">
-                    {metric.value}
-                  </p>
-                  <p className="scvp-body-sm mt-2 max-w-[24ch] text-slate-300">
-                    {metric.label}
-                  </p>
-                </article>
-              ))}
-            </div>
+                <p className="scvp-body-sm mt-2 max-w-[24ch] text-slate-300">
+                  {metric.label}
+                </p>
+              </article>
+            ))}
           </div>
         </div>
       </section>
