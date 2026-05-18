@@ -52,15 +52,6 @@ const institutionalPageConfig = {
 
 export async function InstitutionalView() {
   const testimonials = await getTestimonials();
-  const ownerImagePath = existsSync(
-    join(process.cwd(), "public/assets/producao/institucional/dono.png"),
-  )
-    ? "/assets/producao/institucional/dono.png"
-    : existsSync(
-          join(process.cwd(), "public/assets/producao/institucional/dono.jpg"),
-        )
-      ? "/assets/producao/institucional/dono.jpg"
-      : "/assets/producao/alunos/aluno-01.png";
   const hqImagePath = existsSync(
     join(
       process.cwd(),
@@ -81,59 +72,26 @@ export async function InstitutionalView() {
     >
       <section
         id="sobre"
-        className="section-shell grid gap-4 py-5 sm:py-6 lg:grid-cols-[1.15fr_0.85fr]"
+        className="section-shell grid gap-4 py-5 sm:py-6 lg:grid-cols-[1.15fr_0.85fr] lg:items-stretch"
       >
         <article className="glass-card mesh-surface relative overflow-hidden rounded-[14px] border-white/12 p-5 shadow-[0_16px_42px_rgba(1,8,14,0.38)]">
-          <div className="grid gap-4 md:grid-cols-[minmax(0,1fr)_220px] md:items-stretch">
-            <div>
-              <Badge className="border border-amber-300/30 bg-amber-500/18 text-amber-300">
-                Rosto da mentoria
-              </Badge>
-              <p className="mt-2 text-[11px] font-semibold uppercase tracking-[0.14em] text-[#7AF9FF]">
-                Professor Fabio Silva
-              </p>
-              <h2 className="mt-3 max-w-2xl font-heading text-3xl font-extrabold uppercase leading-tight text-slate-50">
-                Ha 16 anos guiando concurseiros com metodo e direcao.
-              </h2>
-              <p className="mt-3 max-w-2xl text-sm leading-6 text-slate-300 sm:text-base">
-                Autoridade, credibilidade e resultado comprovado com
-                acompanhamento estrategico, rotina de execucao e decisao
-                orientada por dados.
-              </p>
-              <div className="mt-5 grid gap-3 sm:grid-cols-3">
-                {[
-                  ["Trajetoria", "16 anos"],
-                  ["Metodo", "80/20"],
-                  ["Base", "Manaus/AM"],
-                ].map(([label, value]) => (
-                  <div
-                    key={label}
-                    className="rounded-[10px] border border-white/12 bg-[#123B4A]/62 p-3"
-                  >
-                    <p className="text-[10px] font-black uppercase tracking-[0.16em] text-slate-400">
-                      {label}
-                    </p>
-                    <p className="mt-1 text-lg font-black text-[#00F0FF]">
-                      {value}
-                    </p>
-                  </div>
-                ))}
-              </div>
-            </div>
-
-            <div className="relative h-72 overflow-hidden rounded-[14px] border border-[#00F0FF]/50 bg-[#001A22] shadow-[0_0_30px_rgba(0,240,255,0.24)] md:h-auto md:min-h-96">
-              <div className="pointer-events-none absolute inset-0 z-10 bg-linear-to-t from-[#001821]/60 via-[#001821]/15 to-transparent" />
-              <Image
-                src={ownerImagePath}
-                alt="Professor Fabio Silva"
-                fill
-                className="object-contain object-bottom"
-                sizes="(max-width: 767px) 100vw, 220px"
-              />
-              <div className="pointer-events-none absolute inset-x-3 bottom-3 z-20 rounded-md border border-[#00F0FF]/35 bg-[#001821]/80 px-2 py-1 text-center text-[10px] font-bold uppercase tracking-[0.12em] text-[#9CFBFF]">
-                Mentor fundador
-              </div>
-            </div>
+          <div>
+            <Badge className="border border-amber-300/30 bg-amber-500/18 text-amber-300">
+              Rosto da mentoria
+            </Badge>
+            <h2 className="mt-3 max-w-2xl font-heading text-3xl font-extrabold uppercase leading-tight text-slate-50">
+              Ha 16 anos guiando concurseiros com metodo e direcao.
+            </h2>
+            <p className="mt-3 max-w-2xl text-sm leading-6 text-slate-300 sm:text-base">
+              Autoridade, credibilidade e resultado comprovado com
+              acompanhamento estrategico, rotina de execucao e decisao orientada
+              por dados.
+            </p>
+            <p className="mt-2 max-w-2xl text-sm leading-6 text-slate-300/90 sm:text-base">
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer
+              facilisis, nibh id varius congue, lorem elit consequat arcu, vitae
+              vulputate augue sem in tellus.
+            </p>
           </div>
         </article>
 
@@ -159,9 +117,6 @@ export async function InstitutionalView() {
           <p className="mt-3 text-sm leading-6 text-slate-300">
             Infraestrutura para aulas, simulados e mentoria com foco em
             desempenho, disciplina e presenca institucional.
-          </p>
-          <p className="mt-4 rounded-[10px] border border-white/12 bg-[#001821]/70 p-3 text-sm font-semibold text-slate-100">
-            Rua Major Gabriel, 1771 - Manaus, AM
           </p>
         </article>
       </section>

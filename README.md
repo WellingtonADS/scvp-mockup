@@ -15,6 +15,7 @@ Mockup Next.js do ecossistema SCVP, com páginas de conversão, catálogo de cur
 ```text
 scvp-mockup/
 ├── public/                   # assets estáticos
+├── scripts/                  # utilitários de apoio (ex.: extração de imagens)
 ├── src/
 │   ├── app/                  # árvore de rotas do App Router
 │   │   ├── page.tsx          # home
@@ -29,7 +30,7 @@ scvp-mockup/
 │   │   └── ui/               # componentes base
 │   ├── core/                 # tipos, dados mock, serviços e utilitários
 │   └── styles/               # globals e tokens visuais
-├── AGENTS.md                 # regras de produto, UX e implementação
+├── tmp/                      # artefatos temporários de operação local
 ├── package.json
 └── README.md
 ```
@@ -50,6 +51,21 @@ npm run dev    # servidor de desenvolvimento
 npm run build  # build de produção
 npm run start  # servidor após build
 npm run lint   # lint do projeto
+```
+
+## Fluxo Essencial de Build/Deploy
+
+Validação mínima antes de PR/release:
+
+```bash
+npm run lint
+npm run build
+```
+
+Deploy local de produção:
+
+```bash
+npm run start
 ```
 
 ## Rotas Principais
@@ -75,12 +91,20 @@ As rotas `src/app/api/scvp/*` continuam disponíveis para demonstração e consu
 
 ## Regras de UX
 
-O projeto segue `AGENTS.md` como fonte de verdade. Pontos essenciais:
+Pontos essenciais:
 
 - Captura e login devem preferir modal/drawer em vez de redirecionamento.
 - CTA crítica deve permanecer acessível no mobile.
 - Autoridade institucional deve estar visível em páginas de conversão.
 - Valores objetivos (preço/salário) devem ser escaneáveis rapidamente.
+
+## Itens Não Críticos para Build/Deploy
+
+Os itens abaixo não são obrigatórios para compilar ou subir a aplicação:
+
+- `tmp/` (arquivos de apoio e saídas temporárias)
+- scripts utilitários em `scripts/` para operações internas de conteúdo
+- documentação auxiliar além deste README
 
 ## Validação Recomendada
 

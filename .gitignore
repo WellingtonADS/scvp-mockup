@@ -83,3 +83,12 @@ Desktop.ini
 *.temp
 *.bak
 .#*
+
+# AI assistant and agent context (not required for deploy)
+AGENTS.md
+CLAUDE.md
+.github/copilot-instructions.md
+
+# Local operational artifacts (not required for deploy)
+tmp/
+build_output.txt
