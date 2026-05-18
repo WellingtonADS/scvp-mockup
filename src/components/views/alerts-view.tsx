@@ -14,6 +14,8 @@ const alertsPageConfig = {
     title: "Central de editais e alertas",
     description:
       "Monitore oportunidades abertas e próximas por carreira, órgão e estado sem perder o timing da inscrição.",
+    imageSrc: "/03-alerts.png",
+    imageAlt: "Destaque visual da página de alertas",
     primaryLead: {
       triggerText: "Ativar aviso",
       title: "Ative alertas prioritarios",

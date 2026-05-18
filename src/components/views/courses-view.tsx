@@ -14,6 +14,8 @@ const coursesPageConfig = {
     title: "Catálogo completo de cursos e mentorias",
     description:
       "Encontre a preparação ideal por carreira, órgão e formato com a curadoria objetiva do método SCVP.",
+    imageSrc: "/02-courses.png",
+    imageAlt: "Destaque visual da página de cursos",
     primaryLead: {
       triggerText: "Quero uma indicação",
       title: "Receba uma indicação de trilha",

@@ -42,7 +42,9 @@ export function ServiceRequestDialog({
       </DialogTrigger>
       <DialogContent className="mesh-surface border-white/10 bg-[#06222B] text-slate-100 sm:max-w-2xl">
         <DialogHeader>
-          <p className="section-kicker">Acesso imediato</p>
+          <p className="section-kicker border-amber-300/35 bg-amber-500/18 text-amber-300">
+            Acesso imediato
+          </p>
           <DialogTitle className="text-2xl font-black uppercase tracking-tight text-slate-50">
             {title}
           </DialogTitle>

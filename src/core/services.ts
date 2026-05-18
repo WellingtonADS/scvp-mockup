@@ -1,6 +1,7 @@
 import {
   alerts,
   courses,
+  instagramFallbackPostUrls,
   materials,
   quickTips,
   testimonials,
@@ -13,6 +14,7 @@ import type {
   CourseFilters,
   CoursesBrowseData,
   HomePageData,
+  InstagramPost,
   Material,
   MaterialFilters,
   MaterialsBrowseData,
@@ -116,4 +118,117 @@ export async function getMaterialsBrowseData(): Promise<MaterialsBrowseData> {
 
 export async function getTestimonials(): Promise<Testimonial[]> {
   return testimonials;
+}
+
+function normalizeInstagramPostUrl(input: string) {
+  try {
+    const parsed = new URL(input);
+    const cleanPath = parsed.pathname.replace(/\/$/, "");
+    return `${parsed.origin}${cleanPath}/`;
+  } catch {
+    return input;
+  }
+}
+
+function buildInstagramEmbedUrl(postUrl: string) {
+  try {
+    const parsed = new URL(postUrl);
+    const cleanPath = parsed.pathname.replace(/\/$/, "");
+    return `${parsed.origin}${cleanPath}/embed/captioned`;
+  } catch {
+    return postUrl;
+  }
+}
+
+function buildFallbackInstagramPosts(limit = 5): InstagramPost[] {
+  return instagramFallbackPostUrls.slice(0, limit).map((postUrl, index) => ({
+    id: `fallback-${index + 1}`,
+    label: `Post ${(index + 1).toString().padStart(2, "0")}`,
+    caption: "Instagram oficial",
+    postUrl,
+    embedUrl: buildInstagramEmbedUrl(postUrl),
+  }));
+}
+
+async function fetchInstagramProfilePosts(
+  username: string,
+  limit: number,
+): Promise<InstagramPost[] | null> {
+  try {
+    const endpoint = `https://www.instagram.com/api/v1/users/web_profile_info/?username=${encodeURIComponent(username)}`;
+    const response = await fetch(endpoint, {
+      headers: {
+        "x-ig-app-id": "936619743392459",
+        "user-agent":
+          "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36",
+        accept: "application/json",
+      },
+      next: { revalidate: 3600 },
+    });
+
+    if (!response.ok) return null;
+
+    const payload = await response.json();
+    const edges: unknown[] =
+      payload?.data?.user?.edge_owner_to_timeline_media?.edges ?? [];
+
+    const posts = edges
+      .slice(0, limit)
+      .map((edge, index) => {
+        const node = (edge as { node?: Record<string, unknown> })?.node;
+        const shortcode =
+          typeof node?.shortcode === "string" ? node.shortcode : null;
+
+        if (!shortcode) return null;
+
+        const postUrl = normalizeInstagramPostUrl(
+          `https://www.instagram.com/p/${shortcode}/`,
+        );
+
+        const captionContainer = node?.edge_media_to_caption as
+          | { edges?: unknown[] }
+          | undefined;
+        const captionEdges = Array.isArray(captionContainer?.edges)
+          ? captionContainer.edges
+          : [];
+
+        const firstCaptionEdge = captionEdges[0] as
+          | { node?: { text?: string } }
+          | undefined;
+
+        const captionText = firstCaptionEdge?.node?.text?.trim();
+        const thumbnailUrl =
+          typeof node?.display_url === "string" ? node.display_url : undefined;
+
+        return {
+          id: `ig-${shortcode}`,
+          label: `Post ${(index + 1).toString().padStart(2, "0")}`,
+          caption:
+            captionText && captionText.length > 90
+              ? `${captionText.slice(0, 90)}...`
+              : captionText || "Instagram oficial",
+          postUrl,
+          embedUrl: buildInstagramEmbedUrl(postUrl),
+          thumbnailUrl,
+        } satisfies InstagramPost;
+      })
+      .filter((post): post is Exclude<typeof post, null> => post !== null);
+
+    return posts.length ? posts : null;
+  } catch {
+    return null;
+  }
+}
+
+export async function getInstagramPosts(limit = 5): Promise<InstagramPost[]> {
+  const username = process.env.SCVP_INSTAGRAM_USERNAME?.trim();
+
+  if (!username) {
+    return buildFallbackInstagramPosts(limit);
+  }
+
+  const autoPosts = await fetchInstagramProfilePosts(username, limit);
+  if (autoPosts?.length) return autoPosts;
+
+  return buildFallbackInstagramPosts(limit);
 }

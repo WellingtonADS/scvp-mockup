@@ -6,24 +6,26 @@ type StickyMobileCtaProps = {
   title: string;
   subtitle: string;
   children: React.ReactNode;
+  showAfterScrollY?: number;
 };
 
 export function StickyMobileCta({
   title,
   subtitle,
   children,
+  showAfterScrollY = 520,
 }: StickyMobileCtaProps) {
   const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
     const onScroll = () => {
-      setIsVisible(window.scrollY > 520);
+      setIsVisible(window.scrollY > showAfterScrollY);
     };
 
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
-  }, []);
+  }, [showAfterScrollY]);
 
   return (
     <div

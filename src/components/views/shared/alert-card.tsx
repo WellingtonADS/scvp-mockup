@@ -35,12 +35,6 @@ function pickImageByEntityId(id: string, images: string[]) {
   return images[safeIndex];
 }
 
-function statusClass(status: AlertItem["status"]) {
-  if (status === "Aberto") return "bg-emerald-500/20 text-emerald-400";
-  if (status === "Próximo") return "bg-[#00F0FF]/20 text-[#00F0FF]";
-  return "bg-slate-500/20 text-slate-300";
-}
-
 export function AlertCard({ alert }: AlertCardProps) {
   const thumbImage = pickImageByEntityId(alert.id, alertThumbImages);
 
@@ -48,9 +42,7 @@ export function AlertCard({ alert }: AlertCardProps) {
     <Card className="surface-elevated group relative gap-0 overflow-hidden rounded-[10px] p-3 transition-all duration-300 hover:-translate-y-0.5 hover:border-[#00F0FF] hover:shadow-[0_0_26px_rgba(0,240,255,0.18)]">
       <div className="absolute inset-x-0 top-0 h-1 bg-linear-to-r from-transparent via-[#00F0FF]/70 to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
       <div className="flex items-center justify-between gap-2">
-        <Badge
-          className={`${statusClass(alert.status)} text-[10px] font-bold uppercase tracking-widest`}
-        >
+        <Badge className="section-kicker border-amber-300/35 bg-amber-500/18 text-amber-300">
           {alert.status}
         </Badge>
         <p className="text-[11px] font-semibold text-slate-300">

@@ -11,6 +11,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import type { Course, FilterOption } from "@/core/types";
 import { paginateItems } from "@/core/utils";
 import { CirclePlay, Play } from "lucide-react";
+import Image from "next/image";
 import { useMemo, useState } from "react";
 import { BrowseEmptyState, BrowsePagination } from "./browse-shared";
 import { CourseCard } from "./course-card";
@@ -31,7 +32,8 @@ const courseTips = [
     id: "dica-penal",
     label: "Dica Penal",
     caption: "Art. 121 em prova",
-    videoUrl: "https://www.youtube.com/embed/6xKWiCMKKJg",
+    videoUrl: "https://www.youtube.com/embed/GCPrDqkDGug",
+    thumbnailUrl: "https://i.ytimg.com/vi/GCPrDqkDGug/hqdefault.jpg",
   },
   {
     id: "edital-prf",
@@ -231,24 +233,42 @@ export function CoursesBrowser({ items, filters }: CoursesBrowserProps) {
             trilha.
           </p>
         </div>
-        <div className="mt-5 grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-6">
+        <div className="mt-5 grid grid-cols-2 gap-3 sm:grid-cols-3 xl:grid-cols-6">
           {courseTips.map((tip) => (
             <button
               key={tip.id}
               type="button"
               onClick={() => setSelectedTip(tip)}
-              className="group space-y-2 rounded-[10px] border border-transparent p-2 text-center transition-colors hover:border-[#00F0FF]/35 hover:bg-white/5"
+              className="group overflow-hidden rounded-[12px] border border-white/12 bg-[#072635]/70 text-left shadow-[0_8px_22px_rgba(1,8,14,0.28)] transition-all hover:-translate-y-0.5 hover:border-[#00F0FF]/45 hover:shadow-[0_0_24px_rgba(0,240,255,0.2)]"
             >
-              <span className="mx-auto flex size-17 items-center justify-center rounded-full border border-[#00F0FF]/65 p-1 transition-transform duration-300 group-hover:scale-105">
-                <span className="relative flex size-full items-center justify-center rounded-full border border-[#00F0FF]/35 bg-[#001A22] text-[#00F0FF] shadow-[0_0_16px_rgba(0,240,255,0.28)]">
-                  <span className="absolute inset-1 rounded-full border border-[#00F0FF]/20" />
-                  <CirclePlay className="size-6" />
+              <span className="relative block aspect-video overflow-hidden border-b border-white/12 bg-[#001A22]">
+                {tip.thumbnailUrl ? (
+                  <Image
+                    src={tip.thumbnailUrl}
+                    alt={`Thumbnail do vídeo ${tip.label}`}
+                    fill
+                    sizes="(max-width: 640px) 50vw, (max-width: 1280px) 33vw, 16vw"
+                    className="object-cover transition-transform duration-500 group-hover:scale-[1.04]"
+                  />
+                ) : (
+                  <span className="absolute inset-0 flex items-center justify-center text-[#00F0FF]">
+                    <CirclePlay className="size-8" />
+                  </span>
+                )}
+                <span className="absolute inset-0 bg-linear-to-t from-[#00131B]/80 via-transparent to-[#00131B]/20" />
+                <span className="absolute bottom-2 right-2 inline-flex items-center gap-1 rounded-full border border-[#00F0FF]/45 bg-[#001A22]/85 px-2 py-1 text-[9px] font-black uppercase tracking-[0.14em] text-[#00F0FF]">
+                  <Play className="size-3" />
+                  Vídeo
                 </span>
               </span>
-              <p className="text-[10px] font-black uppercase tracking-[0.12em] text-slate-100">
-                {tip.label}
-              </p>
-              <p className="text-[10px] text-slate-400">{tip.caption}</p>
+              <span className="block space-y-1.5 p-2.5">
+                <p className="text-[10px] font-black uppercase tracking-[0.14em] text-slate-50">
+                  {tip.label}
+                </p>
+                <p className="text-[11px] leading-4 text-slate-300">
+                  {tip.caption}
+                </p>
+              </span>
             </button>
           ))}
         </div>

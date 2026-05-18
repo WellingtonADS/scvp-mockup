@@ -1,14 +1,15 @@
 import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import type { Course } from "@/core/types";
+import { cn } from "@/core/utils";
 import { FileText, Video } from "lucide-react";
 import Image from "next/image";
-import Link from "next/link";
+import { CourseDetailsDialog } from "./course-details-dialog";
 import { ServiceRequestDialog } from "./service-request-dialog";
 
 type CourseCardProps = {
   course: Course;
+  className?: string;
 };
 
 const courseCoverImages = [
@@ -25,17 +26,22 @@ function pickImageByEntityId(id: string, images: string[]) {
   return images[safeIndex];
 }
 
-export function CourseCard({ course }: CourseCardProps) {
+export function CourseCard({ course, className }: CourseCardProps) {
   const [priceValue, priceSuffix] = course.price.split("/");
   const showModeLabel =
     course.tag.trim().toLowerCase() !== course.mode.trim().toLowerCase();
   const coverImage = pickImageByEntityId(course.id, courseCoverImages);
 
   return (
-    <Card className="surface-elevated group relative mx-auto w-full max-w-88 gap-0 overflow-hidden rounded-[10px] p-2.5 transition-all duration-300 hover:-translate-y-0.5 hover:border-[#00F0FF] hover:shadow-[0_0_26px_rgba(0,240,255,0.18)] sm:p-3">
+    <Card
+      className={cn(
+        "surface-elevated group relative mx-auto w-full max-w-88 gap-0 overflow-hidden rounded-[10px] p-2.5 transition-all duration-300 hover:-translate-y-0.5 hover:border-[#00F0FF] hover:shadow-[0_0_26px_rgba(0,240,255,0.18)] sm:p-3",
+        className,
+      )}
+    >
       <div className="absolute inset-x-0 top-0 h-1 bg-linear-to-r from-transparent via-[#00F0FF]/70 to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
       <div className="flex items-center justify-between gap-2">
-        <Badge className="scvp-label scvp-label-pill scvp-label-pill-cyan font-bold">
+        <Badge className="section-kicker border-amber-300/35 bg-amber-500/18 text-amber-300">
           {course.tag}
         </Badge>
         {showModeLabel ? (
@@ -57,9 +63,11 @@ export function CourseCard({ course }: CourseCardProps) {
       <p className="scvp-meta mt-2">
         {course.career} • {course.organ}
       </p>
-      <h3 className="scvp-title-card mt-1 line-clamp-2 min-h-8">
-        {course.title}
-      </h3>
+      <div className="mt-1 min-h-[4.6rem]">
+        <h3 className="scvp-h3 line-clamp-2 text-white normal-case">
+          {course.title}
+        </h3>
+      </div>
       <div className="mt-2 flex flex-wrap items-center gap-x-2 gap-y-1 text-[10px] text-slate-300">
         <span className="flex items-center gap-1">
           <Video className="size-3 text-[#00F0FF]" /> Vídeo
@@ -84,14 +92,10 @@ export function CourseCard({ course }: CourseCardProps) {
       </div>
 
       <div className="mt-2 grid grid-cols-2 gap-2">
-        <Button
-          asChild
-          size="sm"
-          variant="outline"
-          className="h-8 border-white/25 bg-transparent text-[10px] font-black uppercase tracking-[0.08em] text-slate-100 hover:bg-white/10 hover:text-slate-100"
-        >
-          <Link href="/cursos#catalogo">Ver detalhes</Link>
-        </Button>
+        <CourseDetailsDialog
+          course={course}
+          triggerClassName="h-8 border-white/25 bg-transparent text-[10px] font-black uppercase tracking-[0.08em] text-slate-100 hover:bg-white/10 hover:text-slate-100"
+        />
         <ServiceRequestDialog
           triggerText="Matricular agora"
           title="Solicite sua matrícula"

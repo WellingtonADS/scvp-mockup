@@ -24,9 +24,11 @@ const institutionalPageConfig = {
   hero: {
     badge: "Professor Fabio Silva",
     title: "Autoridade SCVP",
-    titleClassName: "max-w-[15ch]",
     description:
       "Metodo, presenca e acompanhamento real para transformar esforço de estudo em aprovacao com estrategia.",
+    imageSrc: "/05-Institucional.png",
+    imageAlt: "Sede institucional SCVP",
+    imageContainerClassName: "w-80 sm:w-96 lg:w-108",
     primaryLead: {
       triggerText: "Falar com a mentoria",
       title: "Converse com a equipe SCVP",
@@ -125,7 +127,7 @@ export async function InstitutionalView() {
                 src={ownerImagePath}
                 alt="Professor Fabio Silva"
                 fill
-                className="object-cover object-top"
+                className="object-contain object-bottom"
                 sizes="(max-width: 767px) 100vw, 220px"
               />
               <div className="pointer-events-none absolute inset-x-3 bottom-3 z-20 rounded-md border border-[#00F0FF]/35 bg-[#001821]/80 px-2 py-1 text-center text-[10px] font-bold uppercase tracking-[0.12em] text-[#9CFBFF]">
@@ -166,7 +168,9 @@ export async function InstitutionalView() {
 
       <section id="historia" className="section-shell py-2 sm:py-3">
         <div className="glass-card rounded-[14px] border-white/12 p-5 shadow-[0_16px_42px_rgba(1,8,14,0.34)]">
-          <p className="section-kicker">Linha do tempo</p>
+          <p className="section-kicker border-amber-300/35 bg-amber-500/18 text-amber-300">
+            Linha do tempo
+          </p>
           <h3 className="mt-2 font-heading text-2xl font-extrabold uppercase text-slate-50">
             Nossa historia
           </h3>
@@ -189,7 +193,9 @@ export async function InstitutionalView() {
       <section id="resultados" className="section-shell py-8">
         <div className="mb-4 flex flex-wrap items-end justify-between gap-3">
           <div>
-            <p className="section-kicker">Prova social</p>
+            <p className="section-kicker border-amber-300/35 bg-amber-500/18 text-amber-300">
+              Prova social
+            </p>
             <h3 className="mt-2 font-heading text-2xl font-extrabold uppercase text-slate-50">
               Quem passou reconhece o caminho
             </h3>

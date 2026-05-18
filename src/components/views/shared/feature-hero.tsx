@@ -1,4 +1,7 @@
+import Image from "next/image";
+
 import { Badge } from "@/components/ui/badge";
+import { cn } from "@/core/utils";
 
 type FeatureHeroProps = {
   badge: string;
@@ -7,6 +10,10 @@ type FeatureHeroProps = {
   primaryAction: React.ReactNode;
   secondaryAction: React.ReactNode;
   titleClassName?: string;
+  imageSrc?: string;
+  imageAlt?: string;
+  imagePriority?: boolean;
+  imageContainerClassName?: string;
 };
 
 export function FeatureHero({
@@ -15,39 +22,70 @@ export function FeatureHero({
   description,
   primaryAction,
   secondaryAction,
-  titleClassName = "max-w-[18ch]",
+  titleClassName,
+  imageSrc,
+  imageAlt = "Imagem de destaque",
+  imagePriority = false,
+  imageContainerClassName,
 }: FeatureHeroProps) {
   return (
-    <section className="relative overflow-hidden border-b border-white/10 py-4 sm:py-5">
-      <div className="absolute inset-0 hero-gradient" />
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_82%_18%,rgba(0,240,255,0.16),transparent_38%)]" />
-      <div className="section-shell relative">
-        <article className="relative overflow-hidden rounded-[20px] border border-[#5f7280]/45 bg-[#062634]/88 px-4 py-5 shadow-[0_18px_44px_rgba(1,8,14,0.42)] backdrop-blur-[1.5px] sm:px-7 sm:py-7">
-          <div className="absolute inset-0 bg-[linear-gradient(110deg,rgba(2,6,23,0.86)_0%,rgba(2,6,23,0.62)_52%,rgba(2,6,23,0.28)_100%)]" />
-          <div className="absolute inset-0 opacity-30 [background:repeating-linear-gradient(90deg,rgba(148,163,184,0.16)_0px,rgba(148,163,184,0.16)_1px,transparent_1px,transparent_120px)]" />
-          <div className="pointer-events-none absolute -right-20 top-1/2 h-60 w-60 -translate-y-1/2 rounded-full border border-[#00F0FF]/20" />
-          <div className="pointer-events-none absolute -right-8 top-1/2 h-36 w-36 -translate-y-1/2 rounded-full border border-[#00F0FF]/30" />
-          <div className="pointer-events-none absolute -bottom-12 left-12 h-24 w-44 rounded-full bg-[#00F0FF]/12 blur-2xl" />
+    <section className="relative overflow-hidden border-b border-white/10 bg-[#041D29]">
+      <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(118deg,rgba(2,6,23,0.94)_0%,rgba(2,6,23,0.75)_48%,rgba(0,34,47,0.42)_100%)]" />
+      <div className="pointer-events-none absolute inset-0 opacity-30 [background:repeating-linear-gradient(90deg,rgba(92,112,126,0.2)_0px,rgba(92,112,126,0.2)_1px,transparent_1px,transparent_150px)]" />
+      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_78%_28%,rgba(0,240,255,0.22),transparent_38%)]" />
 
-          <div className="relative z-10 flex flex-col justify-end gap-3 sm:min-h-52 lg:min-h-56">
-            <Badge className="w-fit min-h-7 border border-amber-300/35 bg-amber-500/18 px-3 py-1 text-[11px] leading-[1.2] font-bold uppercase tracking-widest text-amber-300">
-              {badge}
-            </Badge>
-            <h1 className={`${titleClassName} scvp-title-page`}>{title}</h1>
-            <div className="flex items-center gap-2.5">
-              <span className="h-px w-16 bg-[linear-gradient(90deg,rgba(0,240,255,0.9),rgba(0,240,255,0.16))] sm:w-24" />
-              <span className="h-2 w-2 rounded-full bg-[#00F0FF] shadow-[0_0_12px_rgba(0,240,255,0.68)]" />
+      <div className="relative">
+        <article className="relative overflow-hidden">
+          <div
+            className={cn(
+              "relative z-10 grid items-center gap-6 px-4 pt-5 sm:px-6 sm:pt-7",
+              imageSrc ? "lg:grid-cols-[1.1fr_0.9fr]" : undefined,
+            )}
+          >
+            <div className="self-start">
+              <Badge className="w-fit min-h-7 border border-amber-300/35 bg-amber-500/18 px-3 py-1 text-[11px] leading-[1.2] font-bold uppercase tracking-widest text-amber-300">
+                {badge}
+              </Badge>
+              <h1
+                className={cn(
+                  "scvp-hero-title mt-4 max-w-[12ch] lg:flex lg:h-50 lg:max-w-xl lg:items-center",
+                  titleClassName,
+                )}
+              >
+                {title}
+              </h1>
+              <p className="scvp-body-lg mt-4 max-w-xl">{description}</p>
+
+              <div className="mt-6 flex flex-wrap items-end gap-3">
+                {primaryAction}
+                {secondaryAction}
+              </div>
             </div>
-            <p className="max-w-2xl text-sm leading-relaxed text-slate-200 sm:text-base">
-              {description}
-            </p>
-            <div className="flex flex-wrap gap-3">
-              {primaryAction}
-              {secondaryAction}
-            </div>
+
+            {imageSrc ? (
+              <figure className="relative mx-auto flex w-full items-end justify-center lg:justify-end">
+                <div
+                  className={cn(
+                    "relative h-80 w-80 shrink-0 sm:h-96 sm:w-96 lg:h-108 lg:w-104",
+                    imageContainerClassName,
+                  )}
+                >
+                  <Image
+                    src={imageSrc}
+                    alt={imageAlt}
+                    fill
+                    priority={imagePriority}
+                    sizes="(max-width: 640px) 280px, (max-width: 1024px) 360px, 420px"
+                    className="object-contain object-bottom"
+                  />
+                </div>
+              </figure>
+            ) : null}
           </div>
         </article>
       </div>
+
+      <div className="relative z-10 h-px w-full bg-[linear-gradient(90deg,transparent_0%,transparent_40%,rgba(0,240,255,0.16)_72%,rgba(0,240,255,0.45)_100%)]" />
     </section>
   );
 }

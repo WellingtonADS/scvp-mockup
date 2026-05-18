@@ -1,15 +1,23 @@
 import type { AlertItem, Course, Material, Testimonial } from "@/core/types";
 
+export const instagramFallbackPostUrls = [
+  "https://www.instagram.com/p/DYc-x16jRZT/",
+  "https://www.instagram.com/p/DYcxwynEyMo/",
+  "https://www.instagram.com/p/DYccbVombwT/",
+  "https://www.instagram.com/p/DYcOtX6FWtB/",
+  "https://www.instagram.com/p/DYcJhCsOZP8/",
+];
+
 const courseSeeds: Course[] = [
   {
     id: "c1",
-    slug: "carreira-policial-am",
-    title: "Carreira Policial AM",
+    slug: "elite seduc-am-presencial",
+    title: "Presencial SEDUC-AM",
     mode: "Presencial",
     price: "R$ 1.200/mês",
     tag: "Presencial",
-    career: "Policial",
-    organ: "PM-AM",
+    career: "Elite",
+    organ: "Seduc-AM",
     description:
       "Trilha intensiva com revisão orientada, simulados presenciais e rotina de cobrança semanal.",
     highlight: "Plantão pós-aula + sala física de desempenho",
@@ -31,13 +39,13 @@ const courseSeeds: Course[] = [
   },
   {
     id: "c3",
-    slug: "portugues-avancado",
-    title: "Português Avançado",
+    slug: "policia-federal",
+    title: "Trilha Polícia Federal",
     mode: "Online",
     price: "R$ 700/mês",
     tag: "Online",
-    career: "Fiscal",
-    organ: "Multibancas",
+    career: "Policial",
+    organ: "PF",
     description:
       "Curso vertical para reforço de interpretação, gramática aplicada e revisão de incidência alta.",
     highlight: "Aulas curtas com mapa de recorrência",

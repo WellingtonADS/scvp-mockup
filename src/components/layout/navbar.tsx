@@ -10,6 +10,7 @@ import {
   DrawerTrigger,
 } from "@/components/ui/drawer";
 import { Menu, Search } from "lucide-react";
+import Image from "next/image";
 import Link from "next/link";
 
 const navigationLinks = [
@@ -20,20 +21,22 @@ const navigationLinks = [
   { href: "/institucional", label: "Institucional" },
 ];
 
-const studentAreaHref = "/cursos";
+const studentAreaHref =
+  "https://presencial.souconcurseiroevoupassar.com/portal/login";
 
 export function Navbar() {
   return (
     <header className="sticky top-0 z-50 border-b border-white/10 bg-[#071A23]/85 shadow-[0_8px_30px_rgba(1,8,14,0.35)] backdrop-blur-xl">
-      <div className="section-shell flex h-16 items-center justify-between gap-3">
-        <Link
-          href="/"
-          className="flex items-center gap-3 text-lg font-black tracking-wide text-slate-50"
-        >
-          <span className="flex size-10 items-center justify-center rounded-xl border border-white/10 bg-white/5 text-sm text-white shadow-[0_0_18px_rgba(0,240,255,0.16)]">
-            SC
-          </span>
-          <span>SCVP</span>
+      <div className="section-shell flex h-28 items-center justify-between gap-3">
+        <Link href="/" className="flex items-center">
+          <Image
+            src="/assets/producao/logos/scvplogo.png"
+            alt="Logo SCVP"
+            width={406}
+            height={106}
+            className="h-24 w-auto object-contain"
+            priority
+          />
         </Link>
         <nav className="hidden items-center gap-5 text-[11px] font-semibold uppercase tracking-[0.18em] text-slate-300 lg:flex">
           {navigationLinks.map((link) => (
@@ -58,7 +61,9 @@ export function Navbar() {
             variant="outline"
             className="h-9 rounded-full border-white/15 bg-white/5 px-4 text-[11px] font-black uppercase tracking-[0.16em] text-slate-100 hover:border-[#00F0FF]/50 hover:bg-[#00F0FF]/10 hover:text-white"
           >
-            <Link href={studentAreaHref}>Área do Aluno</Link>
+            <Link href={studentAreaHref} target="_blank" rel="noreferrer noopener">
+              Área do Aluno
+            </Link>
           </Button>
         </nav>
 
@@ -77,7 +82,9 @@ export function Navbar() {
             variant="outline"
             className="h-10 rounded-full border-white/15 bg-white/5 px-4 font-bold uppercase tracking-wide text-slate-100 hover:border-[#00F0FF]/50 hover:bg-[#00F0FF]/10 hover:text-white"
           >
-            <Link href={studentAreaHref}>Área do Aluno</Link>
+            <Link href={studentAreaHref} target="_blank" rel="noreferrer noopener">
+              Área do Aluno
+            </Link>
           </Button>
 
           <Drawer direction="bottom">
@@ -120,7 +127,13 @@ export function Navbar() {
                     variant="outline"
                     className="h-12 border-white/15 bg-transparent text-slate-100 hover:bg-white/10 hover:text-slate-100"
                   >
-                    <Link href={studentAreaHref}>Área do Aluno</Link>
+                    <Link
+                      href={studentAreaHref}
+                      target="_blank"
+                      rel="noreferrer noopener"
+                    >
+                      Área do Aluno
+                    </Link>
                   </Button>
                   <Button
                     asChild

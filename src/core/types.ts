@@ -30,6 +30,15 @@ export type AlertItem = {
   summary: string;
 };
 
+export type InstagramPost = {
+  id: string;
+  label: string;
+  caption: string;
+  postUrl: string;
+  embedUrl: string;
+  thumbnailUrl?: string;
+};
+
 export type MaterialType =
   | "E-book"
   | "Edital Verticalizado"

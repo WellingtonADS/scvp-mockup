@@ -32,7 +32,7 @@ export function MaterialCard({ material }: MaterialCardProps) {
     <Card className="surface-elevated group relative gap-0 overflow-hidden rounded-[10px] p-4 transition-all duration-300 hover:-translate-y-1 hover:border-[#00F0FF] hover:shadow-[0_0_30px_rgba(0,240,255,0.22)]">
       <div className="absolute inset-x-0 top-0 h-1 bg-linear-to-r from-transparent via-[#00F0FF]/70 to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
       <div className="flex items-center justify-between gap-2">
-        <Badge className="border border-[#00F0FF]/35 bg-[#00F0FF]/10 text-[10px] font-bold uppercase tracking-widest text-[#00F0FF]">
+        <Badge className="section-kicker border-amber-300/35 bg-amber-500/18 text-amber-300">
           {material.tipo}
         </Badge>
         <p className="text-xs font-semibold text-slate-300">

@@ -14,6 +14,8 @@ const hubPageConfig = {
     title: "Hub de materiais estratégicos",
     description:
       "Acesse recursos gratuitos por carreira e tipo de material para organizar sua revisão com prioridade real.",
+    imageSrc: "/04-hub.png",
+    imageAlt: "Destaque visual da página de hub",
     primaryLead: {
       triggerText: "Liberar materiais",
       title: "Receba materiais estratégicos",

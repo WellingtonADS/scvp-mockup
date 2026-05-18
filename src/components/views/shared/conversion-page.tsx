@@ -18,6 +18,9 @@ type ConversionPageConfig = {
     secondaryHref: string;
     secondaryLabel: string;
     titleClassName?: string;
+    imageSrc?: string;
+    imageAlt?: string;
+    imageContainerClassName?: string;
   };
   stickyCta: {
     title: string;
@@ -48,7 +51,15 @@ export function ConversionPage({
         title={hero.title}
         titleClassName={hero.titleClassName}
         description={hero.description}
-        primaryAction={<ServiceRequestDialog {...hero.primaryLead} />}
+        imageSrc={hero.imageSrc}
+        imageAlt={hero.imageAlt}
+        imageContainerClassName={hero.imageContainerClassName}
+        primaryAction={
+          <ServiceRequestDialog
+            {...hero.primaryLead}
+            triggerClassName="h-12 rounded-[10px] px-7 text-[13px] tracking-[0.12em]"
+          />
+        }
         secondaryAction={
           <SecondaryCtaLink href={hero.secondaryHref}>
             {hero.secondaryLabel}
