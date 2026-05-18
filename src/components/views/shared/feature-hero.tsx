@@ -48,7 +48,7 @@ export function FeatureHero({
               </Badge>
               <h1
                 className={cn(
-                  "scvp-hero-title mt-4 max-w-[12ch] lg:flex lg:h-50 lg:max-w-xl lg:items-center",
+                  "scvp-hero-title mt-4 max-w-[12ch] leading-[1.08] tracking-[-0.01em] text-balance lg:flex lg:h-50 lg:max-w-xl lg:items-center",
                   titleClassName,
                 )}
               >
