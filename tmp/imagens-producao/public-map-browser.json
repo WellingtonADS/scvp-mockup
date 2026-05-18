@@ -1,0 +1,52 @@
+[
+  {
+    "category": "logos",
+    "sourceUrl": "https://souconcurseiroevoupassar.com/files/logos/20250910034404000000Ativo_32_1.png?1757529844",
+    "localPath": "public/assets/producao/logos/logo-principal.png"
+  },
+  {
+    "category": "capas",
+    "sourceUrl": "https://souconcurseiroevoupassar.com/files/capas/f4f59c9c4af95e22401128c8443dfcad.jpg",
+    "localPath": "public/assets/producao/capas/capa-01.png"
+  },
+  {
+    "category": "capas",
+    "sourceUrl": "https://souconcurseiroevoupassar.com/files/capas/a0407c6b030aaae5216fabebdba1b187.jpg",
+    "localPath": "public/assets/producao/capas/capa-02.png"
+  },
+  {
+    "category": "capas",
+    "sourceUrl": "https://souconcurseiroevoupassar.com/files/capas/62030ca11e4f911fd7428e35e84b53ca.jpg",
+    "localPath": "public/assets/producao/capas/capa-03.png"
+  },
+  {
+    "category": "posts",
+    "sourceUrl": "https://souconcurseiroevoupassar.com/files/posts/87995695e6472608b85dd49859ea0120.jpg",
+    "localPath": "public/assets/producao/posts/post-01.png"
+  },
+  {
+    "category": "posts",
+    "sourceUrl": "https://souconcurseiroevoupassar.com/files/posts/05b5c9030c86a0a387ccb7bf624ecfd6.jpg",
+    "localPath": "public/assets/producao/posts/post-02.png"
+  },
+  {
+    "category": "posts",
+    "sourceUrl": "https://souconcurseiroevoupassar.com/files/posts/eb6f123f7259743be5a756a754f0ac61.jpg",
+    "localPath": "public/assets/producao/posts/post-03.png"
+  },
+  {
+    "category": "alunos",
+    "sourceUrl": "https://souconcurseiroevoupassar.com/files/alunos/29-07-39-19-Alex.jpeg",
+    "localPath": "public/assets/producao/alunos/aluno-01.png"
+  },
+  {
+    "category": "alunos",
+    "sourceUrl": "https://souconcurseiroevoupassar.com/files/alunos/29-07-44-18-WhatsApp_Image_2019_05_29_at_17_33_33.jpeg",
+    "localPath": "public/assets/producao/alunos/aluno-02.png"
+  },
+  {
+    "category": "alunos",
+    "sourceUrl": "https://souconcurseiroevoupassar.com/files/alunos/29-07-48-43-WhatsApp_Image_2019_05_29_at_17_33_26.jpeg",
+    "localPath": "public/assets/producao/alunos/aluno-03.png"
+  }
+]

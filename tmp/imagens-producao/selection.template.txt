@@ -1,0 +1,4 @@
+﻿# Liste aqui as imagens que vao para o projeto local.
+# Aceita URL completa ou caminho relativo (ex.: /files/capas/exemplo.jpg).
+# Linhas com # sao ignoradas.
+

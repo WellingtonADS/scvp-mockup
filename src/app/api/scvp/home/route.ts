@@ -1,5 +1,4 @@
-import { quickTips, testimonials } from "@/lib/scvp-home-data";
-import { courses } from "@/lib/scvp-courses-data";
+import { courses, quickTips, testimonials } from "@/core/constants";
 import { NextResponse } from "next/server";
 
 export async function GET() {
