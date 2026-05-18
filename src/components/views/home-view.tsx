@@ -82,7 +82,7 @@ export function HomeView({
         imagePriority
         primaryAction={
           <ServiceRequestDialog
-            triggerText="Quero ser aprovado"
+            triggerText="Quero passar"
             triggerClassName="h-12 rounded-[10px] px-7 text-[13px] tracking-[0.12em]"
             title="Comece pela rota certa"
             description="Informe seus dados para receber uma orientacao inicial alinhada ao seu edital e ao seu momento de preparacao."

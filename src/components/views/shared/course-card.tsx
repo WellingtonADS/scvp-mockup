@@ -94,13 +94,13 @@ export function CourseCard({ course, className }: CourseCardProps) {
       <div className="mt-2 grid grid-cols-2 gap-2">
         <CourseDetailsDialog
           course={course}
-          triggerClassName="h-8 border-white/25 bg-transparent text-[10px] font-black uppercase tracking-[0.08em] text-slate-100 hover:bg-white/10 hover:text-slate-100"
+          triggerClassName="scvp-btn-card-secondary"
         />
         <ServiceRequestDialog
           triggerText="Matricular agora"
           title="Solicite sua matrícula"
           description={`Informe seus dados para a equipe SCVP orientar a matrícula em ${course.title}.`}
-          triggerClassName="h-8 text-[10px] tracking-[0.08em]"
+          triggerClassName="scvp-btn-card-primary"
           triggerSize="sm"
         />
       </div>

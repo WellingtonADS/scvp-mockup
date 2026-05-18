@@ -47,12 +47,12 @@ export function Footer() {
               SCVP
             </p>
             <p
-              className={`${footerDisplay.className} text-[11px] uppercase tracking-[0.2em] text-amber-300`}
+              className={`${footerDisplay.className} scvp-meta text-amber-300 tracking-[0.2em]`}
             >
               {institutionalInfo.yearsOfAuthority}
             </p>
             <p
-              className={`${footerBody.className} max-w-xl text-[15px] leading-relaxed text-slate-300`}
+              className={`${footerBody.className} scvp-body max-w-xl text-slate-300`}
             >
               Preparação estratégica para concursos com método 80/20, mentoria
               especializada e execução orientada por resultado.
@@ -61,14 +61,14 @@ export function Footer() {
               <a
                 href={institutionalInfo.whatsappUrl}
                 {...externalLinkProps}
-                className="inline-flex min-h-10 items-center gap-2 rounded-full border border-[#00F0FF]/35 bg-[#00F0FF]/10 px-4 text-[11px] font-black uppercase tracking-[0.14em] text-[#7EF9FF] transition-colors hover:border-[#00F0FF]/70 hover:text-[#B2FCFF]"
+                className="scvp-btn-footer border border-[#00F0FF]/35 bg-[#00F0FF]/10 text-[#7EF9FF] hover:border-[#00F0FF]/70 hover:text-[#B2FCFF]"
               >
                 <PhoneCall className="size-3.5" />
                 Atendimento WhatsApp
               </a>
               <Link
                 href={institutionalInfo.studentAreaHref}
-                className="inline-flex min-h-10 items-center gap-2 rounded-full border border-white/15 bg-white/5 px-4 text-[11px] font-black uppercase tracking-[0.14em] text-slate-100 transition-colors hover:border-white/35 hover:text-white"
+                className="scvp-btn-footer border border-white/15 bg-white/5 text-slate-100 hover:border-white/35 hover:text-white"
               >
                 <GraduationCap className="size-3.5" />
                 Área do Aluno
@@ -78,12 +78,12 @@ export function Footer() {
 
           <nav>
             <p
-              className={`${footerDisplay.className} text-[11px] uppercase tracking-[0.2em] text-slate-200`}
+              className={`${footerDisplay.className} scvp-meta text-slate-200 tracking-[0.2em]`}
             >
               Navegação
             </p>
             <ul
-              className={`${footerBody.className} mt-4 space-y-2.5 text-[15px] text-slate-300`}
+              className={`${footerBody.className} scvp-body mt-4 space-y-2.5 text-slate-300`}
             >
               {navigationLinks.map((item) => (
                 <li key={item.href}>
@@ -100,12 +100,12 @@ export function Footer() {
 
           <nav>
             <p
-              className={`${footerDisplay.className} text-[11px] uppercase tracking-[0.2em] text-slate-200`}
+              className={`${footerDisplay.className} scvp-meta text-slate-200 tracking-[0.2em]`}
             >
               Institucional
             </p>
             <ul
-              className={`${footerBody.className} mt-4 space-y-2.5 text-[15px] text-slate-300`}
+              className={`${footerBody.className} scvp-body mt-4 space-y-2.5 text-slate-300`}
             >
               {institutionalLinks.map((item) => {
                 const isExternal = item.href.startsWith("http");
@@ -137,26 +137,26 @@ export function Footer() {
 
         <div className="pt-5">
           <div
-            className={`${footerBody.className} flex flex-col items-center gap-2 text-[14px] text-slate-300 lg:flex-row lg:flex-wrap lg:justify-center lg:gap-x-5 lg:gap-y-2`}
+            className={`${footerBody.className} scvp-body-sm flex flex-col items-center gap-2 text-center text-slate-300 lg:flex-row lg:flex-wrap lg:justify-center lg:gap-x-5 lg:gap-y-2`}
           >
             <p className="font-semibold text-slate-100">
               CNPJ {institutionalInfo.cnpj}
             </p>
-            <p className="flex items-center justify-center gap-2">
+            <p className="flex max-w-full items-center justify-center gap-2 text-center">
               <MapPin className="mt-0.5 size-4 shrink-0 text-[#00F0FF]/80" />
-              <span>
+              <span className="text-center">
                 {institutionalInfo.address}, {institutionalInfo.cityState}
               </span>
             </p>
-            <p className="flex items-center justify-center gap-2">
+            <p className="flex max-w-full items-center justify-center gap-2 text-center">
               <PhoneCall className="size-4 shrink-0 text-[#00F0FF]/80" />
-              <span>{institutionalInfo.phones}</span>
+              <span className="text-center">{institutionalInfo.phones}</span>
             </p>
-            <p className="flex items-center justify-center gap-2">
+            <p className="flex max-w-full items-center justify-center gap-2 text-center">
               <Mail className="size-4 shrink-0 text-[#00F0FF]/80" />
               <a
                 href={`mailto:${institutionalInfo.email}`}
-                className="transition-colors hover:text-white"
+                className="text-center transition-colors hover:text-white"
               >
                 {institutionalInfo.email}
               </a>
@@ -164,7 +164,9 @@ export function Footer() {
           </div>
 
           <div className="mt-4 flex items-center justify-center border-t border-white/10 pt-4">
-            <p className={`${footerBody.className} text-xs text-slate-400`}>
+            <p
+              className={`${footerBody.className} scvp-body-sm text-slate-400`}
+            >
               © {currentYear} SCVP. Todos os direitos reservados.
             </p>
           </div>

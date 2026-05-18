@@ -17,7 +17,7 @@ const coursesPageConfig = {
     imageSrc: "/02-courses.png",
     imageAlt: "Destaque visual da página de cursos",
     primaryLead: {
-      triggerText: "Quero uma indicação",
+      triggerText: "Quero indicação",
       title: "Receba uma indicação de trilha",
       description:
         "Informe seus dados para a equipe orientar o curso mais aderente ao seu edital e momento de preparação.",
@@ -29,7 +29,7 @@ const coursesPageConfig = {
     title: "Catálogo liberado",
     subtitle: "Fale com a equipe e escolha sua trilha",
     lead: {
-      triggerText: "Quero uma indicação",
+      triggerText: "Quero indicação",
       title: "Receba uma indicação de trilha",
       description:
         "A equipe SCVP indica o caminho mais eficiente para seu edital.",

@@ -99,7 +99,7 @@ export function AlertCard({ alert }: AlertCardProps) {
             <Button
               size="sm"
               variant="outline"
-              className="h-8 border-white/25 bg-transparent text-[10px] font-black uppercase tracking-[0.08em] text-slate-100 hover:bg-white/10 hover:text-slate-100"
+              className="scvp-btn-card-secondary"
             >
               Ver edital
             </Button>
@@ -158,7 +158,7 @@ export function AlertCard({ alert }: AlertCardProps) {
           triggerText="Salvar alerta"
           title="Salve este edital no radar"
           description={`Informe seus dados para receber avisos e materiais relacionados a ${alert.orgao}.`}
-          triggerClassName="h-8 text-[10px] tracking-[0.08em]"
+          triggerClassName="scvp-btn-card-primary"
           triggerSize="sm"
         />
       </div>

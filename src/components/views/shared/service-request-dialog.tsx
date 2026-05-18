@@ -32,10 +32,7 @@ export function ServiceRequestDialog({
       <DialogTrigger asChild>
         <Button
           size={triggerSize}
-          className={cn(
-            "cta-cyan font-black uppercase tracking-wide",
-            triggerClassName,
-          )}
+          className={cn("cta-cyan scvp-btn-cta", triggerClassName)}
         >
           {triggerText}
         </Button>
@@ -45,9 +42,7 @@ export function ServiceRequestDialog({
           <p className="section-kicker border-amber-300/35 bg-amber-500/18 text-amber-300">
             Acesso imediato
           </p>
-          <DialogTitle className="text-2xl font-black uppercase tracking-tight text-slate-50">
-            {title}
-          </DialogTitle>
+          <DialogTitle className="scvp-title-dialog">{title}</DialogTitle>
           <DialogDescription className="max-w-xl text-slate-300">
             {description}
           </DialogDescription>
@@ -71,9 +66,7 @@ export function ServiceRequestDialog({
             />
           </form>
           <div className="rounded-2xl border border-white/10 bg-[#001821]/70 p-4">
-            <p className="text-[11px] font-black uppercase tracking-[0.18em] text-amber-400">
-              O que você recebe
-            </p>
+            <p className="scvp-meta text-amber-400">O que você recebe</p>
             <ul className="mt-4 space-y-3 text-sm text-slate-300">
               <li>Planner inicial com priorização 80/20.</li>
               <li>Alertas de edital e materiais por carreira.</li>
@@ -82,7 +75,7 @@ export function ServiceRequestDialog({
           </div>
         </div>
         <DialogFooter>
-          <Button className="cta-cyan w-full font-black uppercase tracking-wide">
+          <Button className="cta-cyan scvp-btn-cta w-full">
             Liberar acesso agora
           </Button>
         </DialogFooter>

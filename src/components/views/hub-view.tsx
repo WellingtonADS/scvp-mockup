@@ -17,7 +17,7 @@ const hubPageConfig = {
     imageSrc: "/04-hub.png",
     imageAlt: "Destaque visual da página de hub",
     primaryLead: {
-      triggerText: "Liberar materiais",
+      triggerText: "Quero materiais",
       title: "Receba materiais estratégicos",
       description:
         "Informe seus dados para liberar planners, editais verticalizados e recomendações por carreira.",

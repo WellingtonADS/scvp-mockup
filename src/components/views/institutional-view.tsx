@@ -6,7 +6,6 @@ import {
   ConversionPage,
   type ConversionPageConfig,
 } from "@/components/views/shared/conversion-page";
-import { ServiceRequestDialog } from "@/components/views/shared/service-request-dialog";
 import { getTestimonials } from "@/core/services";
 import Image from "next/image";
 
@@ -30,7 +29,7 @@ const institutionalPageConfig = {
     imageAlt: "Sede institucional SCVP",
     imageContainerClassName: "w-80 sm:w-96 lg:w-108",
     primaryLead: {
-      triggerText: "Falar com a mentoria",
+      triggerText: "Falar com equipe",
       title: "Converse com a equipe SCVP",
       description:
         "Informe seus dados para entender qual formato de acompanhamento faz mais sentido para sua prova.",
@@ -42,7 +41,7 @@ const institutionalPageConfig = {
     title: "Mentoria SCVP",
     subtitle: "Fale com a equipe e escolha sua rota",
     lead: {
-      triggerText: "Falar com a mentoria",
+      triggerText: "Falar com equipe",
       title: "Converse com a equipe SCVP",
       description:
         "A equipe SCVP indica o formato mais eficiente para seu edital e momento de preparacao.",
@@ -79,7 +78,7 @@ export async function InstitutionalView() {
             <Badge className="border border-amber-300/30 bg-amber-500/18 text-amber-300">
               Rosto da mentoria
             </Badge>
-            <h2 className="mt-3 max-w-2xl font-heading text-3xl font-extrabold uppercase leading-tight text-slate-50">
+            <h2 className="scvp-title-section mt-3 max-w-2xl">
               Ha 16 anos guiando concurseiros com metodo e direcao.
             </h2>
             <p className="mt-3 max-w-2xl text-sm leading-6 text-slate-300 sm:text-base">
@@ -108,10 +107,8 @@ export async function InstitutionalView() {
             />
             <div className="pointer-events-none absolute inset-0 bg-linear-to-t from-[#00141D]/82 via-[#00141D]/15 to-transparent" />
           </div>
-          <p className="text-[10px] font-black uppercase tracking-[0.18em] text-[#00F0FF]">
-            Sede fisica
-          </p>
-          <h3 className="mt-3 font-heading text-2xl font-extrabold uppercase leading-tight text-slate-50">
+          <p className="scvp-meta-strong">Sede fisica</p>
+          <h3 className="scvp-h3 mt-3 uppercase leading-tight">
             Nossa sede em Manaus/AM
           </h3>
           <p className="mt-3 text-sm leading-6 text-slate-300">
@@ -126,9 +123,7 @@ export async function InstitutionalView() {
           <p className="section-kicker border-amber-300/35 bg-amber-500/18 text-amber-300">
             Linha do tempo
           </p>
-          <h3 className="mt-2 font-heading text-2xl font-extrabold uppercase text-slate-50">
-            Nossa historia
-          </h3>
+          <h3 className="scvp-h3 mt-2 uppercase">Nossa historia</h3>
           <div className="mt-4 grid gap-3 md:grid-cols-4">
             {timeline.map((item) => (
               <div
@@ -151,15 +146,10 @@ export async function InstitutionalView() {
             <p className="section-kicker border-amber-300/35 bg-amber-500/18 text-amber-300">
               Prova social
             </p>
-            <h3 className="mt-2 font-heading text-2xl font-extrabold uppercase text-slate-50">
+            <h3 className="scvp-h3 mt-2 uppercase">
               Quem passou reconhece o caminho
             </h3>
           </div>
-          <ServiceRequestDialog
-            triggerText="Entrar na trilha"
-            title="Comece pela rota certa"
-            description="Receba uma orientacao inicial para transformar estudo disperso em plano de aprovacao."
-          />
         </div>
         <div className="grid gap-4 md:grid-cols-3">
           {testimonials.map((item) => (

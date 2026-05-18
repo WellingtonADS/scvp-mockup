@@ -36,10 +36,8 @@ export function StickyMobileCta({
     >
       <div className="mx-auto flex max-w-7xl items-center justify-between gap-3">
         <div className="min-w-0">
-          <p className="truncate text-[11px] font-black uppercase tracking-[0.18em] text-[#00F0FF]">
-            {title}
-          </p>
-          <p className="truncate text-xs text-slate-300">{subtitle}</p>
+          <p className="scvp-meta-strong truncate">{title}</p>
+          <p className="scvp-body-sm truncate text-slate-300">{subtitle}</p>
         </div>
         <div className="shrink-0">{children}</div>
       </div>

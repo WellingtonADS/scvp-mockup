@@ -57,11 +57,11 @@ export function ConversionPage({
         primaryAction={
           <ServiceRequestDialog
             {...hero.primaryLead}
-            triggerClassName="h-12 rounded-[10px] px-7 text-[13px] tracking-[0.12em]"
+            triggerClassName="scvp-btn-hero"
           />
         }
         secondaryAction={
-          <SecondaryCtaLink href={hero.secondaryHref}>
+          <SecondaryCtaLink href={hero.secondaryHref} className="scvp-btn-hero">
             {hero.secondaryLabel}
           </SecondaryCtaLink>
         }

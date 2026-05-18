@@ -75,7 +75,7 @@ export function FeatureHero({
               </div>
 
               <div
-                className="mt-6 flex flex-wrap items-end gap-3 lg:mt-auto"
+                className="mt-6 grid grid-cols-2 gap-2 [&>*]:w-full sm:flex sm:flex-wrap sm:items-end sm:gap-3 sm:[&>*]:w-auto lg:mt-auto"
                 data-testid="feature-hero-actions"
               >
                 {primaryAction}
