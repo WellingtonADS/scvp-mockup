@@ -39,7 +39,7 @@ export function FeatureHero({
           <div
             className={cn(
               "relative z-10 grid items-center gap-6 px-4 pt-5 sm:px-6 sm:pt-7",
-              imageSrc ? "md:grid-cols-[1.1fr_0.9fr]" : undefined,
+              imageSrc ? "lg:grid-cols-[1.1fr_0.9fr]" : undefined,
             )}
           >
             <div className="self-start">
@@ -48,7 +48,7 @@ export function FeatureHero({
               </Badge>
               <h1
                 className={cn(
-                  "scvp-hero-title mt-4 max-w-[12ch] leading-[1.08] tracking-[-0.01em] text-balance sm:max-w-[14ch] md:max-w-xl lg:flex lg:h-50 lg:items-center",
+                  "scvp-hero-title mt-4 max-w-[22ch] leading-[1.08] tracking-[-0.01em] text-balance sm:max-w-[24ch] md:max-w-[26ch] lg:max-w-[17ch] xl:max-w-[18ch] 2xl:max-w-[19ch]",
                   titleClassName,
                 )}
               >
