@@ -21,6 +21,15 @@ yarn-error.log*
 # Testing
 /coverage
 /.nyc_output
+/playwright-report
+/test-results
+/e2e/
+/tests/e2e/
+/tests/**/*.spec.ts-snapshots/
+/tests/**/*-snapshot*.png
+/tests/**/*-snapshot*.jpg
+/tests/**/*-snapshot*.jpeg
+/tests/**/*-snapshot*.webp
 
 # Next.js
 /.next/
