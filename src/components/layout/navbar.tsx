@@ -25,6 +25,13 @@ const studentAreaHref =
   "https://presencial.souconcurseiroevoupassar.com/portal/login";
 
 export function Navbar() {
+  const handleStudentAreaClick = () => {
+    const cleanUrl = new URL(studentAreaHref);
+    cleanUrl.search = "";
+    cleanUrl.hash = "";
+    window.open(cleanUrl.toString(), "_blank", "noopener,noreferrer");
+  };
+
   return (
     <header className="sticky top-0 z-50 border-b border-white/10 bg-[#071A23]/85 shadow-[0_8px_30px_rgba(1,8,14,0.35)] backdrop-blur-xl">
       <div className="section-shell flex h-28 items-center justify-between gap-3">
@@ -56,18 +63,12 @@ export function Navbar() {
             <Search className="size-4" />
           </button>
           <Button
-            asChild
             size="sm"
             variant="outline"
             className="h-9 rounded-full border-white/15 bg-white/5 px-4 text-[11px] font-black uppercase tracking-[0.16em] text-slate-100 hover:border-[#00F0FF]/50 hover:bg-[#00F0FF]/10 hover:text-white"
+            onClick={handleStudentAreaClick}
           >
-            <Link
-              href={studentAreaHref}
-              target="_blank"
-              rel="noreferrer noopener"
-            >
-              Área do Aluno
-            </Link>
+            Área do Aluno
           </Button>
         </nav>
 
@@ -81,18 +82,12 @@ export function Navbar() {
           </button>
 
           <Button
-            asChild
             size="sm"
             variant="outline"
             className="h-10 rounded-full border-white/15 bg-white/5 px-4 font-bold uppercase tracking-wide text-slate-100 hover:border-[#00F0FF]/50 hover:bg-[#00F0FF]/10 hover:text-white"
+            onClick={handleStudentAreaClick}
           >
-            <Link
-              href={studentAreaHref}
-              target="_blank"
-              rel="noreferrer noopener"
-            >
-              Área do Aluno
-            </Link>
+            Área do Aluno
           </Button>
 
           <Drawer direction="bottom">
@@ -130,18 +125,12 @@ export function Navbar() {
 
                 <div className="grid gap-3">
                   <Button
-                    asChild
                     size="lg"
                     variant="outline"
                     className="h-12 border-white/15 bg-transparent text-slate-100 hover:bg-white/10 hover:text-slate-100"
+                    onClick={handleStudentAreaClick}
                   >
-                    <Link
-                      href={studentAreaHref}
-                      target="_blank"
-                      rel="noreferrer noopener"
-                    >
-                      Área do Aluno
-                    </Link>
+                    Área do Aluno
                   </Button>
                   <Button
                     asChild
