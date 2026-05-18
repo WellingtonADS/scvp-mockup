@@ -61,11 +61,7 @@ export function Navbar() {
             variant="outline"
             className="h-9 rounded-full border-white/15 bg-white/5 px-4 text-[11px] font-black uppercase tracking-[0.16em] text-slate-100 hover:border-[#00F0FF]/50 hover:bg-[#00F0FF]/10 hover:text-white"
           >
-            <a
-              href={studentAreaHref}
-              target="_blank"
-              rel="noopener noreferrer"
-            >
+            <a href={studentAreaHref} target="_blank" rel="noopener noreferrer">
               Área do Aluno
             </a>
           </Button>
@@ -86,11 +82,7 @@ export function Navbar() {
             variant="outline"
             className="h-10 rounded-full border-white/15 bg-white/5 px-4 font-bold uppercase tracking-wide text-slate-100 hover:border-[#00F0FF]/50 hover:bg-[#00F0FF]/10 hover:text-white"
           >
-            <a
-              href={studentAreaHref}
-              target="_blank"
-              rel="noopener noreferrer"
-            >
+            <a href={studentAreaHref} target="_blank" rel="noopener noreferrer">
               Área do Aluno
             </a>
           </Button>
